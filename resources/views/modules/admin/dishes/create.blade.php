@@ -8,7 +8,7 @@
                     <h2 class="login_form_heading text-center mb-5">
                         კერძის დამატება მენიუში
                     </h2>
-                    <form action="{{ route('dishes') }}" method="POST" class="w-100" enctype="multipart/form-data">
+                    <form action="{{ route('dishes.create', ['restaurant_id' => $restaurant_id]) }}" method="POST" class="w-100" enctype="multipart/form-data">
                         @csrf
 
                         @if(!empty(session('success')))

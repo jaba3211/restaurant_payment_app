@@ -39,9 +39,9 @@ Route::post('/category/create', [CategoriesController::class,'create'])->name('c
 Route::get('/category/delete', [CategoriesController::class,'delete'])->name('categories.delete')->middleware('auth');
 Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
 /* dishes */
-Route::get('/dish/create', [DishesController::class,'index'])->name('dishes')->middleware('auth');
+Route::get('/dish/create/{restaurant_id}', [DishesController::class,'index'])->name('dishes')->middleware('auth');
 Route::get('/dish/list/{restaurant_id}', [DishesController::class,'beck'])->name('dishes.beck')->middleware('auth');
-Route::get('/dish/create/{restaurant_id}', [DishesController::class,'create'])->name('dishes.create')->middleware('auth');
+Route::post('/dish/create/{restaurant_id}', [DishesController::class,'create'])->name('dishes.create')->middleware('auth');
 Route::get('/dish/delete', [DishesController::class,'delete'])->name('dishes.delete')->middleware('auth');
 
 
