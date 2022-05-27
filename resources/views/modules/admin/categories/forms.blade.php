@@ -7,6 +7,9 @@
 @endphp
 <form action="{{ $url }}" method="POST" class="w-100" enctype="multipart/form-data">
     @csrf
+    @if(!empty(session('error')))
+        <h1 style="color: red">{{ session('error') }}</h1>
+    @endif
     <div class="form-group mb-3">
         <label for="restaurant_name" class="form-label">კატეგორიის დასახელება</label>
         <input type="text" name="name" id="restaurant_name" class="form-control"

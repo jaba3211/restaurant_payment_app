@@ -97,7 +97,7 @@ class CategoriesController extends BaseController
             $attributes['image'] = $image;
             $request->image->storeAs('public/images/', $image);
         } else
-            return redirect(route('categories.add'))->with('error', 'Image does not upload');
+            return redirect(route('categories.edit',['category_id' => $id]))->with('error', 'Image does not upload');
 
         Category::where('id',$id)->update($attributes);
 

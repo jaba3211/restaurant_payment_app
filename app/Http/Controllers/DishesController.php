@@ -58,19 +58,30 @@ class DishesController extends BaseController
     /**
      * @return Application|Factory|View
      */
-    public function add(Request $request, $restaurant_id)
+    public function add($restaurant_id)
     {
+        $this->data['templateName'] = 'create';
         $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.dishes.create', $this->data);
+    }
+    /**
+     * @return Application|Factory|View
+     */
+    public function edit(Dish $dish, Request $request, $restaurant_id, $dish_id)
+    {
+        $this->data['templateName'] = 'update';
+        $this->data['row'] = $dish->getDish($dish_id);
+        $this->data['restaurant_id'] = $restaurant_id;
+        return view('modules.admin.dishes.update', $this->data);
     }
 
     /**
      * @param Request $request
-     * @param $restaurant_id
      * @return Application|RedirectResponse|Redirector
      */
-    public function create(Request $request, $restaurant_id)
+    public function create(Request $request)
     {
+        $restaurant_id = $request->get('restaurant_id');
         $attributes = request()->validate($this->validationArray);
         $attributes['user_id'] = auth()->user()->id;
         $attributes['restaurant_id'] = $restaurant_id;
@@ -79,9 +90,36 @@ class DishesController extends BaseController
             $attributes['image'] = $image;
             $request->image->storeAs('public/images/', $image);
         } else
-            return redirect(route('dishes.add', $this->data))->withInput()->withErrors(['success' => "Image does not upload"]);
+            return redirect(route('dishes.add',['restaurant_id' => $restaurant_id], $this->data))->withInput()->withErrors(['image' => "Image does not upload"]);
         Dish::create($attributes);
         return redirect(route('dishes.add', ['restaurant_id' => $restaurant_id]))->with('success', 'The dish was added!');
+
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Dish $dish, Request $request, $restaurant_id)
+    {
+        $id = $request->get('dish_id');
+        $this->data['row'] = $dish->getDish($id);
+        $attributes = request()->validate($this->validationArray);
+        $attributes['user_id'] = auth()->user()->id;
+        $attributes['restaurant_id'] = $restaurant_id;
+        if (!empty($request->image) && $request->hasFile('image')) {
+            if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
+                unlink(storage_path('app/public/images/'.$row->image));
+            }
+            $image = $request->file('image')->getClientOriginalName();
+            $attributes['image'] = $image;
+            $request->image->storeAs('public/images/', $image);
+        } else
+            return redirect(route('dishes.edit',['restaurant_id' => $restaurant_id, 'dish_id' => $id], $this->data))
+                ->withInput()->withErrors(['image' => "Image does not upload"]);
+        Dish::where('id',$id)->update($attributes);
+        return redirect(route('dishes.edit', ['restaurant_id' => $restaurant_id,'dish_id' => $id]))
+            ->with('success', 'The dish was updated!');
 
     }
 
@@ -92,7 +130,7 @@ class DishesController extends BaseController
      */
     public function delete(Dish $dish,Request $request)
     {
-        $id = $request->get('id');
+        $id = $request->get('dish_id');
         $row = $dish->getDish($id);
         $restaurant_id = $row['restaurant_id'];
         if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
