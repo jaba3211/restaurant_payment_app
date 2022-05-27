@@ -34,7 +34,7 @@ class RestaurantsController extends BaseController
     public function index(Restaurant $restaurant)
     {
         $this->data['list'] = $restaurant->getRestaurants();
-        return view('modules.admin.restaurants.beck',$this->data);
+        return view('modules.admin.restaurants.wrapper',$this->data);
     }
 
     /**

@@ -8,7 +8,7 @@
 
             <div class="d-flex align-items-center flex-column main-comps-container">
                 <div class="cards-group w-100">
-                    @include('modules.admin.dishes.beck_list')
+                    @include('modules.admin.dishes.list')
                 </div>
             </div>
         </div>

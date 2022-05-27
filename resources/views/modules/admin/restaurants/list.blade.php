@@ -4,7 +4,7 @@
         <div class="card-body">
             <a href="{{ route('restaurants.edit', ['restaurant_id' => $row['id']]) }}" class="btn btn-warning">განახლება</a>
             <a href="{{ route('restaurants.delete', ['restaurant_id' => $row['id']]) }}" class="btn btn-danger">წაშლა</a>
-            <a href="{{ route('dishes.beck', ['restaurant_id' => $row['id']]) }}" class="btn btn-info">კერძების დამატება</a>
+            <a href="{{ route('dishes', ['restaurant_id' => $row['id']]) }}" class="btn btn-primary">კერძის დამატება</a>
         </div>
     </div>
 @endforeach

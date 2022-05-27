@@ -35,7 +35,7 @@ class CategoriesController extends BaseController
     public function index(Category $category)
     {
         $this->data['list'] = $category->getCategories();
-        return view('modules.admin.categories.beck',$this->data);
+        return view('modules.admin.categories.wrapper',$this->data);
     }
 
     /**
@@ -45,6 +45,16 @@ class CategoriesController extends BaseController
     {
         $this->data['templateName'] = 'create';
         return view('modules.admin.categories.create',$this->data);
+    }
+
+    /**
+     * @return void
+     */
+    public function edit(Category $category, Request $request, $category_id)
+    {
+        $this->data['row'] = $category->getCategory($category_id);
+        $this->data['templateName'] = 'update';
+        return view('modules.admin.categories.update',$this->data);
     }
 
     /**
@@ -60,7 +70,7 @@ class CategoriesController extends BaseController
             $attributes['image'] = $image;
             $request->image->storeAs('public/images/', $image);
         } else
-            return redirect(route('categories.create'))->with('error', 'Image does not upload');
+            return redirect(route('categories.add'))->with('error', 'Image does not upload');
 
         Category::create($attributes);
 
@@ -70,12 +80,38 @@ class CategoriesController extends BaseController
 
     /**
      * @param Category $category
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Category $category ,Request $request)
+    {
+        $id = $request->get('category_id');
+        $row = $category->getCategory($id);
+        $attributes = request()->validate($this->validationArray);
+
+        if ($request->hasFile('image')) {
+            if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
+                unlink(storage_path('app/public/images/'.$row->image));
+            }
+            $image = $request->file('image')->getClientOriginalName();
+            $attributes['image'] = $image;
+            $request->image->storeAs('public/images/', $image);
+        } else
+            return redirect(route('categories.add'))->with('error', 'Image does not upload');
+
+        Category::where('id',$id)->update($attributes);
+
+        return redirect('category/list');
+    }
+
+    /**
+     * @param Category $category
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
     public function delete(Category $category,Request $request)
     {
-        $id = $request->get('id');
+        $id = $request->get('category_id');
         $row = $category->getCategory($id);
         if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
             unlink(storage_path('app/public/images/'.$row->image));
@@ -83,6 +119,7 @@ class CategoriesController extends BaseController
         $row->delete();
         return redirect('category/list');
     }
+
     /*front */
     /**
      * @param Category $category

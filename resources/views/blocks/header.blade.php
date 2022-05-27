@@ -25,10 +25,10 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     @if(auth()->check() and isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('restaurants.beck') }}">რესტორნები</a>
+                                <a class="nav-link" href="{{ route('restaurants') }}">რესტორნები</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('categories.beck') }}">კატეგორიები</a>
+                                <a class="nav-link" href="{{ route('categories') }}">კატეგორიები</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">რეგისტრაცია</a>

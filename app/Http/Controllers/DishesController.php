@@ -52,7 +52,7 @@ class DishesController extends BaseController
     {
         $this->data['list'] = $dish->getDishes($restaurant_id);
         $this->data['restaurant_id'] = $restaurant_id;
-        return view('modules.admin.dishes.beck',$this->data);
+        return view('modules.admin.dishes.wrapper',$this->data);
     }
 
     /**
@@ -79,9 +79,9 @@ class DishesController extends BaseController
             $attributes['image'] = $image;
             $request->image->storeAs('public/images/', $image);
         } else
-            return redirect(route('dishes.create', $this->data))->withInput()->withErrors(['success' => "Image does not upload"]);
+            return redirect(route('dishes.add', $this->data))->withInput()->withErrors(['success' => "Image does not upload"]);
         Dish::create($attributes);
-        return redirect(route('dishes.create', ['restaurant_id' => $restaurant_id]))->with('success', 'The dish was added!');
+        return redirect(route('dishes.add', ['restaurant_id' => $restaurant_id]))->with('success', 'The dish was added!');
 
     }
 
