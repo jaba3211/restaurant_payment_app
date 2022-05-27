@@ -43,9 +43,22 @@ class DishesController extends BaseController
     }
 
     /**
+     * @param Dish $dish
+     * @param Request $request
+     * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function index(Request $request, $restaurant_id)
+    public function index(Dish $dish, Request $request, $restaurant_id)
+    {
+        $this->data['list'] = $dish->getDishes($restaurant_id);
+        $this->data['restaurant_id'] = $restaurant_id;
+        return view('modules.admin.dishes.beck',$this->data);
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function add(Request $request, $restaurant_id)
     {
         $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.dishes.create', $this->data);
@@ -70,19 +83,6 @@ class DishesController extends BaseController
         Dish::create($attributes);
         return redirect(route('dishes.create', ['restaurant_id' => $restaurant_id]))->with('success', 'The dish was added!');
 
-    }
-
-    /**
-     * @param Dish $dish
-     * @param Request $request
-     * @param $restaurant_id
-     * @return Application|Factory|View
-     */
-    public function beck(Dish $dish, Request $request, $restaurant_id)
-    {
-        $this->data['list'] = $dish->getDishes($restaurant_id);
-        $this->data['restaurant_id'] = $restaurant_id;
-        return view('modules.admin.dishes.beck',$this->data);
     }
 
     /**

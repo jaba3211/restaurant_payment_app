@@ -24,17 +24,29 @@ class RestaurantsController extends BaseController
 
     /* backend */
 
+    public $data;
     private $validationArray = [
-        'name' => 'required|max:191',
+        'name' => 'required|max:191|unique:restaurants,name',
         'description' => '',
     ];
 
     /**
+     * @param Restaurant $restaurant
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
-        return view('modules.admin.restaurants.create');
+        $this->data['list'] = $restaurant->getRestaurants();
+        return view('modules.admin.restaurants.beck',$this->data);
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function add()
+    {
+        $this->data['templateName'] = 'create';
+        return view('modules.admin.restaurants.create',$this->data);
     }
 
     /**
@@ -50,13 +62,15 @@ class RestaurantsController extends BaseController
     }
 
     /**
-     * @param Restaurant $restaurant
-     * @return Application|Factory|View
+     * @return Application|RedirectResponse|Redirector
      */
-    public function beck(Restaurant $restaurant)
+    public function update($restaurant_id)
     {
-        $this->data['list'] = $restaurant->getRestaurants();
-        return view('modules.admin.restaurants.beck',$this->data);
+        $attributes = request()->validate($this->validationArray);
+        Restaurant::create($attributes);
+
+        return redirect('restaurant/list');
+
     }
 
     /**

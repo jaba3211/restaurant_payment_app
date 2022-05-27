@@ -25,15 +25,26 @@ class CategoriesController extends BaseController
 
     private $validationArray = [
         'name' => 'required|max:191',
-        'image' => 'image|mimes:jpeg,png,jpg,gif',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|nullable',
     ];
 
     /**
+     * @param Category $category
      * @return Application|Factory|View
      */
     public function index(Category $category)
     {
-        return view('modules.admin.categories.create');
+        $this->data['list'] = $category->getCategories();
+        return view('modules.admin.categories.beck',$this->data);
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function add(Category $category)
+    {
+        $this->data['templateName'] = 'create';
+        return view('modules.admin.categories.create',$this->data);
     }
 
     /**
@@ -55,16 +66,6 @@ class CategoriesController extends BaseController
 
         return redirect('category/list');
 
-    }
-
-    /**
-     * @param Category $category
-     * @return Application|Factory|View
-     */
-    public function beck(Category $category)
-    {
-        $this->data['list'] = $category->getCategories();
-        return view('modules.admin.categories.beck',$this->data);
     }
 
     /**

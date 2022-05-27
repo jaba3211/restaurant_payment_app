@@ -5,9 +5,9 @@
             <div class="container">
                 <div class="d-flex align-items-center flex-column main-comps-container">
                     <h2 class="login_form_heading text-center mb-5">
-                        რესტორნის დამატება
+                        კატეგორიის განახლება
                     </h2>
-                    @include('modules.admin.restaurants.forms')
+                    @include('modules.admin.categories.forms')
                 </div>
             </div>
         </div>

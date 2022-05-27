@@ -28,20 +28,23 @@ Route::post('/authorization', [SessionsController::class,'create'])->name('log_i
 Route::get('logout', [SessionsController::class,'logout'])->name('log_out');
 
 /* restaurants */
-Route::get('/restaurant/create', [RestaurantsController::class,'index'])->name('restaurants')->middleware('auth');
-Route::get('/restaurant/list', [RestaurantsController::class,'beck'])->name('restaurants.beck')->middleware('auth');
+Route::get('/restaurant/create', [RestaurantsController::class,'add'])->name('restaurants')->middleware('auth');
+Route::get('/restaurant/list', [RestaurantsController::class,'index'])->name('restaurants.beck')->middleware('auth');
 Route::post('/restaurant/create', [RestaurantsController::class,'create'])->name('restaurants.create')->middleware('auth');
 Route::get('/restaurant/delete', [RestaurantsController::class,'delete'])->name('restaurants.delete')->middleware('auth');
+Route::post('/restaurant/update/{restaurant_id}', [RestaurantsController::class,'update'])->name('restaurants.update')->middleware('auth');
 /* categories */
-Route::get('/category/create', [CategoriesController::class,'index'])->name('categories')->middleware('auth');
-Route::get('/category/list', [CategoriesController::class,'beck'])->name('categories.beck')->middleware('auth');
+Route::get('/category/create', [CategoriesController::class,'add'])->name('categories')->middleware('auth');
+Route::get('/category/list', [CategoriesController::class,'index'])->name('categories.beck')->middleware('auth');
 Route::post('/category/create', [CategoriesController::class,'create'])->name('categories.create')->middleware('auth');
 Route::get('/category/delete', [CategoriesController::class,'delete'])->name('categories.delete')->middleware('auth');
+Route::post('/category/update', [CategoriesController::class,'update'])->name('categories.update')->middleware('auth');
 Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
 /* dishes */
-Route::get('/dish/create/{restaurant_id}', [DishesController::class,'index'])->name('dishes')->middleware('auth');
-Route::get('/dish/list/{restaurant_id}', [DishesController::class,'beck'])->name('dishes.beck')->middleware('auth');
+Route::get('/dish/create/{restaurant_id}', [DishesController::class,'add'])->name('dishes')->middleware('auth');
+Route::get('/dish/list/{restaurant_id}', [DishesController::class,'index'])->name('dishes.beck')->middleware('auth');
 Route::post('/dish/create/{restaurant_id}', [DishesController::class,'create'])->name('dishes.create')->middleware('auth');
 Route::get('/dish/delete', [DishesController::class,'delete'])->name('dishes.delete')->middleware('auth');
+Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])->name('dishes.update')->middleware('auth');
 
 
