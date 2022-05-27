@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 
 class CategoriesController extends BaseController
@@ -26,7 +25,7 @@ class CategoriesController extends BaseController
 
     private $validationArray = [
         'name' => 'required|max:191',
-        'image' => 'unique:categories|image|mimes:jpeg,png,jpg,gif',
+        'image' => 'image|mimes:jpeg,png,jpg,gif',
     ];
 
     /**
@@ -77,8 +76,8 @@ class CategoriesController extends BaseController
     {
         $id = $request->get('id');
         $row = $category->getCategory($id);
-        if(!empty($row->image) && File::exists(public_path('images'.$row->image))){
-            Storage::delete('public/images/'.$row->image);
+        if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
+            unlink(storage_path('app/public/images/'.$row->image));
         }
         $row->delete();
         return redirect('category/list');

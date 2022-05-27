@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Dish;
-use App\Models\Restaurant;
-use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,7 +28,7 @@ class DishesController extends BaseController
     private $validationArray = [
         'name' => 'required|max:191',
         'price' => 'required',
-        'image' => 'unique:dishes,image|image|mimes:jpeg,png,jpg,gif',
+        'image' => 'image|mimes:jpeg,png,jpg,gif',
         'description' => '',
         'category_id' => 'required',
         'restaurant_id' => '',
@@ -59,7 +58,6 @@ class DishesController extends BaseController
      */
     public function create(Request $request, $restaurant_id)
     {
-//        dd($restaurant_id);
         $attributes = request()->validate($this->validationArray);
         $attributes['user_id'] = auth()->user()->id;
         $attributes['restaurant_id'] = $restaurant_id;
@@ -97,6 +95,9 @@ class DishesController extends BaseController
         $id = $request->get('id');
         $row = $dish->getDish($id);
         $restaurant_id = $row['restaurant_id'];
+        if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
+            unlink(storage_path('app/public/images/'.$row->image));
+        }
         $row->delete();
         return redirect('dish/list/'.$restaurant_id);
     }
