@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
-use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,8 +12,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controller as BaseController;
 
 class RestaurantsController extends BaseController
@@ -50,6 +47,16 @@ class RestaurantsController extends BaseController
     }
 
     /**
+     * @return Application|Factory|View
+     */
+    public function edit(Restaurant $restaurant, $restaurant_id)
+    {
+        $this->data['templateName'] = 'update';
+        $this->data['row'] = $restaurant->getRestaurant($restaurant_id);
+        return view('modules.admin.restaurants.update',$this->data);
+    }
+
+    /**
      * @return Application|RedirectResponse|Redirector
      */
     public function create()
@@ -64,10 +71,11 @@ class RestaurantsController extends BaseController
     /**
      * @return Application|RedirectResponse|Redirector
      */
-    public function update($restaurant_id)
+    public function update(Request $request)
     {
+        $id = $request->get('restaurant_id');
         $attributes = request()->validate($this->validationArray);
-        Restaurant::create($attributes);
+        Restaurant::where('id',$id)->update($attributes);
 
         return redirect('restaurant/list');
 
@@ -80,7 +88,7 @@ class RestaurantsController extends BaseController
      */
     public function delete(Restaurant $restaurant,Request $request)
     {
-        $id = $request->get('id');
+        $id = $request->get('restaurant_id');
         $row = $restaurant->getRestaurant($id);
         $row->delete();
         return redirect('restaurant/list');
