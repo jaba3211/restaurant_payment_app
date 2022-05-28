@@ -104,19 +104,25 @@ class DishesController extends BaseController
     {
         $id = $request->get('dish_id');
         $this->data['row'] = $dish->getDish($id);
+        $row = $this->data['row'];
         $attributes = request()->validate($this->validationArray);
         $attributes['user_id'] = auth()->user()->id;
         $attributes['restaurant_id'] = $restaurant_id;
-        if (!empty($request->image) && $request->hasFile('image')) {
-            if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
-                unlink(storage_path('app/public/images/'.$row->image));
-            }
-            $image = $request->file('image')->getClientOriginalName();
-            $attributes['image'] = $image;
-            $request->image->storeAs('public/images/', $image);
-        } else
-            return redirect(route('dishes.edit',['restaurant_id' => $restaurant_id, 'dish_id' => $id], $this->data))
-                ->withInput()->withErrors(['image' => "Image does not upload"]);
+        if(Empty($request->file('image'))){
+            $this->validationArray['image'] = '';
+            $attributes = request()->validate($this->validationArray);
+        }else {
+            if (!empty($request->image) && $request->hasFile('image')) {
+                if (!empty($row->image) && File::exists(storage_path('app/public/images/' . $row->image))) {
+                    unlink(storage_path('app/public/images/' . $row->image));
+                }
+                $image = $request->file('image')->getClientOriginalName();
+                $attributes['image'] = $image;
+                $request->image->storeAs('public/images/', $image);
+            } else
+                return redirect(route('dishes.edit', ['restaurant_id' => $restaurant_id, 'dish_id' => $id], $this->data))
+                    ->withInput()->withErrors(['image' => "Image does not upload"]);
+        }
         Dish::where('id',$id)->update($attributes);
         return redirect(route('dishes.edit', ['restaurant_id' => $restaurant_id,'dish_id' => $id]))
             ->with('success', 'The dish was updated!');

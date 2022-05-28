@@ -89,16 +89,20 @@ class CategoriesController extends BaseController
         $row = $category->getCategory($id);
         $attributes = request()->validate($this->validationArray);
 
-        if ($request->hasFile('image')) {
-            if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
-                unlink(storage_path('app/public/images/'.$row->image));
-            }
-            $image = $request->file('image')->getClientOriginalName();
-            $attributes['image'] = $image;
-            $request->image->storeAs('public/images/', $image);
-        } else
-            return redirect(route('categories.edit',['category_id' => $id]))->with('error', 'Image does not upload');
-
+        if(Empty($request->file('image'))){
+            $this->validationArray['image'] = '';
+            $attributes = request()->validate($this->validationArray);
+        }else {
+            if ($request->hasFile('image')) {
+                if (!empty($row->image) && File::exists(storage_path('app/public/images/' . $row->image))) {
+                    unlink(storage_path('app/public/images/' . $row->image));
+                }
+                $image = $request->file('image')->getClientOriginalName();
+                $attributes['image'] = $image;
+                $request->image->storeAs('public/images/', $image);
+            } else
+                return redirect(route('categories.edit', ['category_id' => $id]))->with('error', 'Image does not upload');
+        }
         Category::where('id',$id)->update($attributes);
 
         return redirect('category/list');
