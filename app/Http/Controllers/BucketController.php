@@ -14,12 +14,16 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
 
-class SessionsController extends BaseController
+class BucketController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public $data;
 
-
-    // --------------------------------------- Log in, Log out ------------------------------------------
+    public function front(Request $request)
+    {
+        $this->data['list'] = $request->session()->get('bucket');
+        return view('bucket/add', $this->data);
+    }
     /**
      * @param User $user
      * @param Request $request
@@ -46,30 +50,4 @@ class SessionsController extends BaseController
 
     }
 
-    /**
-     * @return void
-     */
-    public function logout()
-    {
-        auth()->logout();
-
-        return redirect('/');
-    }
-
-    // --------------------------------------- bucket ------------------------------------------
-
-    /**
-     * @param Request $request
-     * @param Dish $dish
-     * @return Application|RedirectResponse|Redirector
-     */
-    public function add(Request $request,Dish $dish)
-    {
-        $dish_id = $request->get('dish_id');
-        $row = $dish->getDish($dish_id);
-        $request->session()->put('bucket',[$row->id => $row]);
-
-        return redirect(route('dishes.inside',['dish_id' => $row->id,'name' => $row->name]));
-
-    }
 }

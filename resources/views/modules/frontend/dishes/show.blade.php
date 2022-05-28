@@ -13,12 +13,8 @@
                             <h5 class="card-title" style="color: #153a1e;">{{ $row->name }}</h5>
                             <p class="card-text">{{ $row->description }}</p>
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
-                            <form action="{{ route('add.bucket',['dish_id' => $row->id]) }}" method="POST">
-                                @csrf
-                                <button type="button" style="background: #153a1e; color:#fff;"  class="btn">
-                                    კალათაში დამატება
-                                </button>
-                            </form>
+                            @include('modules.frontend.dishes.forms')
+{{--                            <a href="{{ route('bucket.add',['dish_id' => $row->id]) }}" class="btn" style="background: #153a1e; color:#fff;">კალათაში დამატება</a>--}}
                         </div>
                     </div>
                     <a href="#" class="btn" style="background: #f4c553; color:#fff;">შეკვეთის ნახვა</a>
