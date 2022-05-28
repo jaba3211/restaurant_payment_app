@@ -21,7 +21,7 @@ class CategoriesController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public $data;
 
-    /* backend */
+                                           /* backend */
 
     private $validationArray = [
         'name' => 'required|max:191',
