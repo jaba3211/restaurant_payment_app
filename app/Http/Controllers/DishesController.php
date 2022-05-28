@@ -23,7 +23,7 @@ class DishesController extends BaseController
 
     public $data;
 
-    /* backend */
+    // ----------------------------------------------------------  backend  --------------------------------------------------------
 
     private $validationArray = [
         'name' => 'required|max:191',
@@ -144,5 +144,26 @@ class DishesController extends BaseController
         }
         $row->delete();
         return redirect('dish/list/'.$restaurant_id);
+    }
+
+    // ----------------------------------------------------------  frontend  --------------------------------------------------------
+    /**
+     * @param Category $category
+     * @return void
+     */
+    public function front(Dish $dish,$category_id)
+    {
+        $this->data['list'] = $dish->getFrontList($category_id);
+        return view('modules.frontend.dishes.wrapper',$this->data);
+    }
+
+    /**
+     * @param Category $category
+     * @return void
+     */
+    public function inside(Dish $dish, $dish_id, $name)
+    {
+        $this->data['row'] = $dish->getDish($dish_id);
+        return view('modules.frontend.dishes.show',$this->data);
     }
 }

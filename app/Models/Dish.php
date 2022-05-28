@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,9 +15,20 @@ class Dish extends Authenticatable
 
     protected $guarded;
 
+    /**
+     * @return BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(Category::class,'category_id','id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class,'restaurant_id','id');
     }
 
     public function getDishes($restaurant_id)
@@ -32,7 +44,18 @@ class Dish extends Authenticatable
      */
     public function getDish($id)
     {
-        return $this->where('id',$id)->first();
+        return $this->with(['restaurant'])
+            ->where('id',$id)->first();
+    }
+
+    /**
+     * @param $category_id
+     * @return mixed
+     */
+    public function getFrontList($category_id)
+    {
+        return $this->with(['restaurant'])
+            ->where('category_id', $category_id)->get();
     }
 
 }

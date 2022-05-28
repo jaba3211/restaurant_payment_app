@@ -7,7 +7,7 @@
                     <h2 class="menu_title my-5">
                         მენიუ
                     </h2>
-                    @include('modules.admin.categories.front_list')
+                    @include('modules.frontend.categories.list')
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ Route::get('/authorization', [AuthController::class,'index'])->name('authorizati
 Route::post('/register', [RegisterController::class,'create'])->name('register');
 Route::post('/authorization', [SessionsController::class,'create'])->name('log_in');
 Route::get('logout', [SessionsController::class,'logout'])->name('log_out');
-
+//----------------------------------------- admin -----------------------------------------------------
 /* restaurants */
 Route::get('/restaurant/list', [RestaurantsController::class,'index'])->name('restaurants')->middleware('auth');
 Route::get('/restaurant/add', [RestaurantsController::class,'add'])->name('restaurants.add')->middleware('auth');
@@ -41,7 +41,6 @@ Route::get('/category/edit/{category_id}', [CategoriesController::class,'edit'])
 Route::post('/category/create', [CategoriesController::class,'create'])->name('categories.create')->middleware('auth');
 Route::get('/category/delete', [CategoriesController::class,'delete'])->name('categories.delete')->middleware('auth');
 Route::post('/category/update', [CategoriesController::class,'update'])->name('categories.update')->middleware('auth');
-Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
 /* dishes */
 Route::get('/dish/list/{restaurant_id}', [DishesController::class,'index'])->name('dishes')->middleware('auth');
 Route::get('/dish/add/{restaurant_id}', [DishesController::class,'add'])->name('dishes.add')->middleware('auth');
@@ -49,5 +48,13 @@ Route::get('/dish/edit/{restaurant_id}/{dish_id}', [DishesController::class,'edi
 Route::post('/dish/create', [DishesController::class,'create'])->name('dishes.create')->middleware('auth');
 Route::get('/dish/delete', [DishesController::class,'delete'])->name('dishes.delete')->middleware('auth');
 Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])->name('dishes.update')->middleware('auth');
+
+//----------------------------------------- frontend -----------------------------------------------------
+/* categories */
+Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
+/* categories */
+Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front')->middleware('auth');
+Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'inside'])->name('dishes.inside')->middleware('auth');
+
 
 

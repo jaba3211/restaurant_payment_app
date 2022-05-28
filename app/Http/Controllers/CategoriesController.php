@@ -124,7 +124,8 @@ class CategoriesController extends BaseController
         return redirect('category/list');
     }
 
-    /*front */
+                                          /* frontend */
+
     /**
      * @param Category $category
      * @return void
@@ -132,6 +133,6 @@ class CategoriesController extends BaseController
     public function front(Category $category)
     {
         $this->data['list'] = $category->getCategories();
-        return view('modules.admin.categories.front',$this->data);
+        return view('modules.frontend.categories.wrapper',$this->data);
     }
 }
