@@ -67,10 +67,29 @@ class SessionsController extends BaseController
      */
     public function add(Request $request, Dish $dish)
     {
-        $request->session()->forget('bucket');
+//        $request->session()->forget('bucket');
         $dish_id = $request->get('dish_id');
         $row = $dish->getDish($dish_id);
-        $request->session()->push('bucket', $row);
+        $bucketArray = $request->session()->get('bucket');
+//        dd($bucketArray);
+        $array = [
+            'user_id' => auth()->user()->id,
+            'id' => $row->id,
+            'name' => $row->name,
+            'price' => $row->price,
+            'image' => $row->image,
+        ];
+        if (!empty($bucketArray)) {
+            foreach ($bucketArray as $arr) {
+                if ($arr['id'] == $array['id']) {
+                    continue;
+                } else {
+                    dd('ასდფ');
+                    $request->session()->push('bucket', $array);
+                }
+            }
+        } else
+            $request->session()->push('bucket', $array);
 
         return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]));
 
