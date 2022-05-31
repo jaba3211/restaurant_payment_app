@@ -54,9 +54,9 @@ Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])-
 Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
 /* categories */
 Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front')->middleware('auth');
-Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'inside'])->name('dishes.inside')->middleware('auth');
+Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'show'])->name('dishes.show')->middleware('auth');
 /* bucket */
-Route::get ('/bucket', [SessionsController::class,'add'])->name('bucket')->middleware('auth');
+Route::get ('/bucket', [SessionsController::class,'index'])->name('bucket')->middleware('auth');
 Route::post('/bucket/add', [SessionsController::class,'add'])->name('bucket.add')->middleware('auth');
 
 

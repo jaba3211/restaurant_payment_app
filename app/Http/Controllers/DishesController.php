@@ -161,8 +161,9 @@ class DishesController extends BaseController
      * @param Category $category
      * @return void
      */
-    public function inside(Dish $dish, $dish_id, $name)
+    public function show(Dish $dish, $dish_id, $name)
     {
+//        dd(session()->get('bucket'));
         $this->data['row'] = $dish->getDish($dish_id);
         return view('modules.frontend.dishes.show',$this->data);
     }
