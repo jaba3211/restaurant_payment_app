@@ -52,6 +52,11 @@
     <p style="color: red">{{ $message }}</p>
     @enderror
     <div class="form-group mb-3">
+        <label for="short_desc" class="form-label">მოკლე აღწერა</label>
+        <textarea name="short_desc" id="short_desc" name="short_desc" rows="4" class="form-control"
+        >{{ $templateName == 'create'? old('short_desc') : $row->short_desc }}</textarea>
+    </div>
+    <div class="form-group mb-3">
         <label for="description" class="form-label">აღწერა</label>
         <textarea name="description" id="description" name="description" rows="5" class="form-control"
         >{{ $templateName == 'create'? old('description') : $row->description }}</textarea>

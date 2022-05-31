@@ -8,7 +8,7 @@
                         {{ $row->restaurant->name }}
                     </h2>
                     <div class="card mb-3">
-                        <img src="{{ asset('storage/images/'.$row->image) }}" class="card-img-top" alt="{{ $row->name }}">
+                        <img src="{{ url('/images/'.$row->image) }}" class="card-img-top" alt="{{ $row->name }}">
                         <div class="card-body">
                             <h5 class="card-title" style="color: #153a1e;">{{ $row->name }}</h5>
                             <p class="card-text">{{ $row->description }}</p>

@@ -68,7 +68,7 @@ class CategoriesController extends BaseController
         if ($request->hasFile('image')) {
             $image = $request->file('image')->getClientOriginalName();
             $attributes['image'] = $image;
-            $request->image->storeAs('public/images/', $image);
+            $request->image->move(public_path('/images'), $image);
         } else
             return redirect(route('categories.add'))->with('error', 'Image does not upload');
 
@@ -94,12 +94,12 @@ class CategoriesController extends BaseController
             $attributes = request()->validate($this->validationArray);
         }else {
             if ($request->hasFile('image')) {
-                if (!empty($row->image) && File::exists(storage_path('app/public/images/' . $row->image))) {
-                    unlink(storage_path('app/public/images/' . $row->image));
+                if (!empty($row->image) && File::exists(public_path('/images/' . $row->image))) {
+                    unlink(public_path('/images/' . $row->image));
                 }
                 $image = $request->file('image')->getClientOriginalName();
                 $attributes['image'] = $image;
-                $request->image->storeAs('public/images/', $image);
+                $request->image->move(public_path('/images'), $image);
             } else
                 return redirect(route('categories.edit', ['category_id' => $id]))->with('error', 'Image does not upload');
         }
@@ -117,8 +117,8 @@ class CategoriesController extends BaseController
     {
         $id = $request->get('category_id');
         $row = $category->getCategory($id);
-        if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
-            unlink(storage_path('app/public/images/'.$row->image));
+        if (!empty($row->image) && File::exists(public_path('/images/' . $row->image))) {
+            unlink(public_path('/images/' . $row->image));
         }
         $row->delete();
         return redirect('category/list');

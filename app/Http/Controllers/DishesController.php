@@ -30,6 +30,7 @@ class DishesController extends BaseController
         'price' => 'required',
         'image' => 'image|mimes:jpeg,png,jpg,gif',
         'description' => '',
+        'short_desc' => '',
         'category_id' => 'required',
         'restaurant_id' => '',
     ];
@@ -88,7 +89,7 @@ class DishesController extends BaseController
         if (!empty($request->image) && $request->hasFile('image')) {
             $image = $request->file('image')->getClientOriginalName();
             $attributes['image'] = $image;
-            $request->image->storeAs('public/images/', $image);
+            $request->image->move(public_path('/images'), $image);
         } else
             return redirect(route('dishes.add',['restaurant_id' => $restaurant_id], $this->data))->withInput()->withErrors(['image' => "Image does not upload"]);
         Dish::create($attributes);
@@ -113,12 +114,12 @@ class DishesController extends BaseController
             $attributes = request()->validate($this->validationArray);
         }else {
             if (!empty($request->image) && $request->hasFile('image')) {
-                if (!empty($row->image) && File::exists(storage_path('app/public/images/' . $row->image))) {
-                    unlink(storage_path('app/public/images/' . $row->image));
+                if (!empty($row->image) && File::exists(public_path('/images/' . $row->image))) {
+                    unlink(public_path('/images/' . $row->image));
                 }
                 $image = $request->file('image')->getClientOriginalName();
                 $attributes['image'] = $image;
-                $request->image->storeAs('public/images/', $image);
+                $request->image->move(public_path('/images'), $image);
             } else
                 return redirect(route('dishes.edit', ['restaurant_id' => $restaurant_id, 'dish_id' => $id], $this->data))
                     ->withInput()->withErrors(['image' => "Image does not upload"]);
@@ -139,8 +140,8 @@ class DishesController extends BaseController
         $id = $request->get('dish_id');
         $row = $dish->getDish($id);
         $restaurant_id = $row['restaurant_id'];
-        if(!empty($row->image) && File::exists(storage_path('app/public/images/'.$row->image))){
-            unlink(storage_path('app/public/images/'.$row->image));
+        if (!empty($row->image) && File::exists(public_path('/images/' . $row->image))) {
+            unlink(public_path('/images/' . $row->image));
         }
         $row->delete();
         return redirect('dish/list/'.$restaurant_id);

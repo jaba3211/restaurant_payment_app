@@ -1,7 +1,7 @@
 @foreach($list as $row)
     <div class="dishes d-flex align-items-center w-100 card mb-3 shadow-sm flex-row single_order_product">
         <span>
-        <img src="{{ asset('storage/images/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="200">
+        <img src="{{ url('/images/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="200">
         </span>
          <span class="menu_cat_name ms-3 fw-bold">
             <div>
