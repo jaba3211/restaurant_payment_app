@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class SessionsController extends BaseController
@@ -20,13 +21,14 @@ class SessionsController extends BaseController
 
 
     // --------------------------------------- Log in, Log out ------------------------------------------
+
     /**
      * @param User $user
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      * @throws ValidationException
      */
-    public function create(User $user,Request $request)
+    public function create(User $user, Request $request)
     {
         $attributes = request()->validate([
             'username' => 'required',
@@ -63,13 +65,20 @@ class SessionsController extends BaseController
      * @param Dish $dish
      * @return Application|RedirectResponse|Redirector
      */
-    public function add(Request $request,Dish $dish)
+    public function add(Request $request, Dish $dish)
     {
+        $request->session()->forget('bucket');
         $dish_id = $request->get('dish_id');
         $row = $dish->getDish($dish_id);
-        $request->session()->put('bucket',[$row->id => $row]);
+        $request->session()->push('bucket', $row);
 
-        return redirect(route('dishes.inside',['dish_id' => $row->id,'name' => $row->name]));
+        return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]));
 
+    }
+
+    public function index(Request $request)
+    {
+        $this->data['list'] = $request->session()->get('bucket');
+        return view('modules.frontend.bucket.wrapper', $this->data);
     }
 }
