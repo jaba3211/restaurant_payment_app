@@ -14,7 +14,6 @@
                             <p class="card-text">{{ $row->description }}</p>
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
                             @include('modules.frontend.dishes.forms')
-{{--                            <a href="{{ route('bucket.add',['dish_id' => $row->id]) }}" class="btn" style="background: #153a1e; color:#fff;">კალათაში დამატება</a>--}}
                         </div>
                     </div>
                     <a href="#" class="btn" style="background: #f4c553; color:#fff;">შეკვეთის ნახვა</a>
