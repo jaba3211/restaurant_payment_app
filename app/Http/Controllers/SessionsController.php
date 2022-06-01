@@ -72,17 +72,18 @@ class SessionsController extends BaseController
         $dish_id = $request->get('dish_id');
         $row = $dish->getDish($dish_id);
         \Cart::add($row->id,$row->name,$row->price,1,[$row->image]);
-        $items = \Cart::getContent();
-        dd($items);
+//        $items = \Cart::getContent();
+//        dd($items);
 
 
-        return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]));
+        return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]))
+            ->with('success','dish was added in cart!');
 
     }
 
     public function index(Request $request)
     {
-        $this->data['list'] = $request->session()->get('bucket');
+        $this->data['list'] = \Cart::getContent();;
         return view('modules.frontend.bucket.wrapper', $this->data);
     }
 }

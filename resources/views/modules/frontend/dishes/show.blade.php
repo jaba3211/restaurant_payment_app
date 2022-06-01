@@ -7,6 +7,9 @@
                     <h2 class="menu_title my-5">
                         {{ $row->restaurant->name }}
                     </h2>
+                    @if(!empty(session('success')))
+                        <h1 style="color: green">{{ session('success') }}</h1>
+                    @endif
                     <div class="card mb-3">
                         <img src="{{ url('/storage/'.$row->image) }}" class="card-img-top" alt="{{ $row->name }}">
                         <div class="card-body">
