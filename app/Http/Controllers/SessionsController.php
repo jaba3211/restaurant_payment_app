@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dish;
 use App\Models\User;
+use Darryldecode\Cart\Cart;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -67,29 +68,13 @@ class SessionsController extends BaseController
      */
     public function add(Request $request, Dish $dish)
     {
-//        $request->session()->forget('bucket');
+//        dd('sdf');
         $dish_id = $request->get('dish_id');
         $row = $dish->getDish($dish_id);
-        $bucketArray = $request->session()->get('bucket');
-//        dd($bucketArray);
-        $array = [
-            'user_id' => auth()->user()->id,
-            'id' => $row->id,
-            'name' => $row->name,
-            'price' => $row->price,
-            'image' => $row->image,
-        ];
-        if (!empty($bucketArray)) {
-            foreach ($bucketArray as $arr) {
-                if ($arr['id'] == $array['id']) {
-                    continue;
-                } else {
-                    dd('ასდფ');
-                    $request->session()->push('bucket', $array);
-                }
-            }
-        } else
-            $request->session()->push('bucket', $array);
+        \Cart::add($row->id,$row->name,$row->price,1,[$row->image]);
+        $items = \Cart::getContent();
+        dd($items);
+
 
         return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]));
 
