@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BucketController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\RegisterController;
@@ -56,8 +57,10 @@ Route::get ('/categories', [CategoriesController::class,'front'])->name('categor
 Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front')->middleware('auth');
 Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'show'])->name('dishes.show')->middleware('auth');
 /* bucket */
-Route::get ('/bucket', [SessionsController::class,'index'])->name('bucket')->middleware('auth');
-Route::post('/bucket/add', [SessionsController::class,'add'])->name('bucket.add')->middleware('auth');
+Route::get ('/bucket', [BucketController::class,'index'])->name('bucket')->middleware('auth');
+Route::get('/bucket/add', [BucketController::class,'add'])->name('bucket.add')->middleware('auth');
+Route::get('/bucket/remove', [BucketController::class,'remove'])->name('bucket.remove')->middleware('auth');
+Route::get('/bucket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel')->middleware('auth');
 
 
 

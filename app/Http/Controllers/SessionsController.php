@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Dish;
 use App\Models\User;
-use Darryldecode\Cart\Cart;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -57,33 +58,5 @@ class SessionsController extends BaseController
         auth()->logout();
 
         return redirect('/');
-    }
-
-    // --------------------------------------- bucket ------------------------------------------
-
-    /**
-     * @param Request $request
-     * @param Dish $dish
-     * @return Application|RedirectResponse|Redirector
-     */
-    public function add(Request $request, Dish $dish)
-    {
-//        dd('sdf');
-        $dish_id = $request->get('dish_id');
-        $row = $dish->getDish($dish_id);
-        \Cart::add($row->id,$row->name,$row->price,1,[$row->image]);
-//        $items = \Cart::getContent();
-//        dd($items);
-
-
-        return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]))
-            ->with('success','dish was added in cart!');
-
-    }
-
-    public function index(Request $request)
-    {
-        $this->data['list'] = \Cart::getContent();;
-        return view('modules.frontend.bucket.wrapper', $this->data);
     }
 }

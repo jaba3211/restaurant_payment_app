@@ -10,4 +10,17 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+    /**
+     * @return bool
+     */
+    public function isInCart()
+    {
+        $item = \Cart::getContent();
+        if (count($item) > 0)
+            return true;
+        else
+            return false;
+    }
 }

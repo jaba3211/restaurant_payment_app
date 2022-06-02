@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dish;
+use Darryldecode\Cart\Cart;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -19,35 +20,50 @@ class BucketController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public $data;
 
-    public function front(Request $request)
-    {
-        $this->data['list'] = $request->session()->get('bucket');
-        return view('bucket/add', $this->data);
-    }
     /**
-     * @param User $user
      * @param Request $request
+     * @param Dish $dish
      * @return Application|RedirectResponse|Redirector
-     * @throws ValidationException
      */
-    public function create(User $user,Request $request)
+    public function add(Request $request, Dish $dish)
     {
-        $attributes = request()->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-        if (auth()->attempt($attributes)) {
-            $data = $user->getFilterUser($request->username);
-            if ($data->status_id == 0) {
-                return redirect('/');
-            } elseif ($data->status_id == 1) {
-                return redirect('restaurant/list');
-            } else
-                return redirect('/register');
-        } else
-            throw ValidationException::withMessages(['username' => "your password or username is incorrect!"]);
+        $dish_id = $request->get('dish_id');
+        $row = $dish->getDish($dish_id);
+        \Cart::add($row->id,$row->name,$row->price,1,$row->image);
 
+        return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]))
+            ->with('success','dish was added in cart!');
 
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function index()
+    {
+        $this->data['list'] = \Cart::getContent();
+        return view('modules.frontend.bucket.wrapper', $this->data);
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function remove(Request $request)
+    {
+        $dish_id = $request->get('dish_id');
+        \Cart::remove($dish_id);
+
+        return redirect(route('bucket'));
+    }
+
+    /**
+     * @return string
+     */
+    public function cancel()
+    {
+        \Cart::clear();
+        return redirect(route('categories.front'));
     }
 
 }

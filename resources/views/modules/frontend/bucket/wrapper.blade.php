@@ -1,10 +1,10 @@
 @extends('parent')
 @section('content')
-    {{ dd($list) }}
     <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
         <div class="container-fluid">
             <div class="container">
-                <div class="d-flex align-items-center flex-column main-comps-container">
+                @if(count($list) > 0)
+                    <div class="d-flex align-items-center flex-column main-comps-container">
                     <h2 class="menu_title my-5">
                         თქვენი შეკვეთა
                     </h2>
@@ -12,13 +12,13 @@
                         @include('modules.frontend.bucket.list')
                         <button type="submit" class="btn btn-success mt-3">შეკვეთის დადასტურება</button>
                     </form>
-
-                    <button class="btn btn-danger mt-3">შეკვეთის გაუქმება</button>
-
+                    <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">შეკვეთის გაუქმება</a>
                 </div>
-                <div class="order_price mt-3 fs-3">
-                    შეკვეთის ჯამი: <span class="text-danger fw-bold">400₾</span>
-                </div>
+                @else
+                    <div class="d-flex align-items-center flex-column main-comps-container">
+                        <h2 class="menu_title my-5">კალათა ცარიელია</h2>
+                    </div>
+                @endif
             </div>
 
         </div>
