@@ -148,9 +148,11 @@ class DishesController extends BaseController
     }
 
     // ----------------------------------------------------------  frontend  --------------------------------------------------------
+
     /**
-     * @param Category $category
-     * @return void
+     * @param Dish $dish
+     * @param $category_id
+     * @return Application|Factory|View
      */
     public function front(Dish $dish,$category_id)
     {
@@ -159,12 +161,13 @@ class DishesController extends BaseController
     }
 
     /**
-     * @param Category $category
-     * @return void
+     * @param Dish $dish
+     * @param $dish_id
+     * @param $name
+     * @return Application|Factory|View
      */
     public function show(Dish $dish, $dish_id, $name)
     {
-//        dd(session()->get('bucket'));
         $this->data['row'] = $dish->getDish($dish_id);
         return view('modules.frontend.dishes.show',$this->data);
     }

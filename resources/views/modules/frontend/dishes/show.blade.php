@@ -18,7 +18,8 @@
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
                             <a href="{{ route('bucket.add',['dish_id' => $row->id]) }}"
                                style="background: #153a1e; color:#fff;"
-                               class="btn">კალათაში დამატება</a>
+                               class="btn">კალათაში დამატება
+                            </a>
                         </div>
                     </div>
                     <a href="{{ route('bucket') }}" class="btn" style="background: #f4c553; color:#fff;">შეკვეთის ნახვა</a>

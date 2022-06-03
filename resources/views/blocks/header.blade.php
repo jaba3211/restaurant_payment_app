@@ -1,3 +1,8 @@
+@php
+    $bucketUrl = auth()->check() ? route('bucket') : route('authorization');
+    $profileUrl = auth()->check() ? route('bucket') : route('authorization');
+@endphp
+
 <header>
     <nav class="navbar navbar-light bg-light main_menu">
         <div class="container-fluid">
@@ -41,10 +46,10 @@
                                 <a class="nav-link" href="{{ route('about_us') }}">ჩვენ შესახებ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">პროფილი</a>
+                                <a class="nav-link" href="{{ $profileUrl }}">პროფილი</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">შეკვეთები</a>
+                                <a class="nav-link" href="{{ $bucketUrl }}">შეკვეთები</a>
                             </li>
                         @endif
 

@@ -67,5 +67,18 @@ if (!function_exists('isStaff')) {
     }
 }
 
+if (!function_exists('isUser')) {
+    /**
+     * @return bool
+     */
+    function isUser()
+    {
+        if (isset(auth()->user()->status_id) and auth()->user()->status_id == USER) {
+            return true;
+        }
+        return false;
+    }
+}
+
 
 
