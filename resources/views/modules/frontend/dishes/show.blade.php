@@ -1,5 +1,8 @@
 @extends('parent')
 @section('content')
+    @php
+        $url = auth() ? route('bucket.add',['dish_id' => $row->id]) : route('authorization')
+    @endphp
     <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
         <div class="container-fluid">
             <div class="container">
@@ -16,7 +19,7 @@
                             <h5 class="card-title" style="color: #153a1e;">{{ $row->name }}</h5>
                             <p class="card-text">{{ $row->description }}</p>
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
-                            <a href="{{ route('bucket.add',['dish_id' => $row->id]) }}"
+                            <a href="{{ $url }}"
                                style="background: #153a1e; color:#fff;"
                                class="btn">კალათაში დამატება
                             </a>

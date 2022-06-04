@@ -52,13 +52,14 @@ Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])-
 
 //----------------------------------------- frontend -----------------------------------------------------
 /* categories */
-Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front')->middleware('auth');
+Route::get ('/categories', [CategoriesController::class,'front'])->name('categories.front');
 /* categories */
-Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front')->middleware('auth');
-Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'show'])->name('dishes.show')->middleware('auth');
+Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front');
+Route::get ('/dishes/{dish_id}/{name}', [DishesController::class,'show'])->name('dishes.show');
 /* bucket */
 Route::get ('/bucket', [BucketController::class,'index'])->name('bucket')->middleware('auth');
 Route::get('/bucket/add', [BucketController::class,'add'])->name('bucket.add')->middleware('auth');
+Route::post('/bucket/update', [BucketController::class,'update'])->name('bucket.update')->middleware('auth');
 Route::get('/bucket/remove', [BucketController::class,'remove'])->name('bucket.remove')->middleware('auth');
 Route::get('/bucket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel')->middleware('auth');
 

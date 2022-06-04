@@ -8,10 +8,8 @@
                     <h2 class="menu_title my-5">
                         თქვენი შეკვეთა
                     </h2>
-                    <form action="#" method="POST">
                         @include('modules.frontend.bucket.list')
                         <button type="submit" class="btn btn-success mt-3">შეკვეთის დადასტურება</button>
-                    </form>
                     <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">შეკვეთის გაუქმება</a>
                 </div>
                 @else

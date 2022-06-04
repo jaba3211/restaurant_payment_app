@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('dish_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('quantity');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedTinyInteger('table');
+
             $table->timestamps();
         });
     }

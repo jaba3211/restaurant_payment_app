@@ -11,17 +11,20 @@
                     <span>₾</span>
                 </div>
             </div>
-            <div class="d-flex">
+            <form action="{{ route('bucket.update', ['dish_id' => $row->id]) }}" method="POST">
+                @csrf
+                <div class="d-flex">
                 <button type="button"
                         class="btn bg-light border rounded-circle d-flex justify-content-center align-items-center minus_btn"
                         style="width: 37px; height: 37px; font-size: 18px;">-</button>
-                <input type="text" value="1" class="form-control w-25 d-inline dish_quantity"
-                       disabled>
+                <input type="text" value="{{ $row->quantity }}" name="quantity" class="form-control w-25 d-inline dish_quantity">
                 <button type="button"
                         class="btn bg-light border rounded-circle d-flex justify-content-center align-items-center plus_btn"
                         style="width: 37px; height: 37px; font-size: 18px;">+</button>
-                <a href="{{ route('bucket.remove',['dish_id' => $row->id]) }}" class="btn btn-danger">წაშლა</a>
+                    <input type="submit" class="btn btn-info" value="რაოდენობის არჩება">
+                    <a href="{{ route('bucket.remove',['dish_id' => $row->id]) }}" class="btn btn-danger">წაშლა</a>
             </div>
+            </form>
         </span>
     </div>
 @endforeach

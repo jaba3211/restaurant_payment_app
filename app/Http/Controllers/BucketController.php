@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dish;
-use Darryldecode\Cart\Cart;
-use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 class BucketController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public $data;
 
     /**
@@ -29,10 +30,10 @@ class BucketController extends BaseController
     {
         $dish_id = $request->get('dish_id');
         $row = $dish->getDish($dish_id);
-        \Cart::add($row->id,$row->name,$row->price,1,$row->image);
+        \Cart::add($row->id, $row->name, $row->price, 1, $row->image);
 
         return redirect(route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]))
-            ->with('success','dish was added in cart!');
+            ->with('success', 'dish was added in cart!');
 
     }
 
@@ -47,18 +48,20 @@ class BucketController extends BaseController
 
     /**
      * @param Request $request
-     * @return Application|Factory|View
+     * @return Application|RedirectResponse|Redirector
      */
     public function remove(Request $request)
     {
         $dish_id = $request->get('dish_id');
         \Cart::remove($dish_id);
-
-        return redirect(route('bucket'));
+        if (count(\Cart::getContent()) > 0)
+            return redirect(route('bucket'));
+        else
+            return redirect(route('categories.front'));
     }
 
     /**
-     * @return string
+     * @return Application|RedirectResponse|Redirector
      */
     public function cancel()
     {
@@ -66,4 +69,15 @@ class BucketController extends BaseController
         return redirect(route('categories.front'));
     }
 
+    /**
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Request $request, Dish $dish)
+    {
+        $dish_id = $request->get('dish_id');
+
+        \Cart::update($dish_id, ['quantity' =>['relative' => false, 'value' => $request->quantity]]);
+        return redirect(route('bucket'));
+    }
 }
