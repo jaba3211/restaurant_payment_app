@@ -49,10 +49,9 @@
                                 <a class="nav-link" href="{{ $profileUrl }}">პროფილი</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ $bucketUrl }}">შეკვეთები</a>
+                                <a class="nav-link" href="{{ $bucketUrl }}">კალათა</a>
                             </li>
                         @endif
-
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

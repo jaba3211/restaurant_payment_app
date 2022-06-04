@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedTinyInteger('quantity');
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedTinyInteger('table');
-
             $table->timestamps();
         });
     }

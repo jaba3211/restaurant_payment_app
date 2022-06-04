@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DishesController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RestaurantsController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,9 @@ Route::get('/bucket/add', [BucketController::class,'add'])->name('bucket.add')->
 Route::post('/bucket/update', [BucketController::class,'update'])->name('bucket.update')->middleware('auth');
 Route::get('/bucket/remove', [BucketController::class,'remove'])->name('bucket.remove')->middleware('auth');
 Route::get('/bucket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel')->middleware('auth');
+/* orders */
+Route::get ('/orders/create', [OrdersController::class,'create'])->name('orders.create')->middleware('auth');
+
 
 
 

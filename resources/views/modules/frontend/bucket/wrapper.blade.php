@@ -8,11 +8,21 @@
                     <h2 class="menu_title my-5">
                         თქვენი შეკვეთა
                     </h2>
+                        @if(!empty(session('error')))
+                            <h2 style="color:red">
+                                {{ session('error') }}
+                            </h2>
+                        @endif
                         @include('modules.frontend.bucket.list')
-                        <button type="submit" class="btn btn-success mt-3">შეკვეთის დადასტურება</button>
-                    <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">შეკვეთის გაუქმება</a>
+                        <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">შეკვეთის გაუქმება</a>
+                        <a href="{{ route('orders.create') }}" class="btn btn-success mt-3">შეკვეთის დადასტურება</a>
                 </div>
                 @else
+                    @if(!empty(session('success')))
+                        <h2 style="color:green">
+                            {{ session('success') }}
+                        </h2>
+                    @endif
                     <div class="d-flex align-items-center flex-column main-comps-container">
                         <h2 class="menu_title my-5">კალათა ცარიელია</h2>
                     </div>
