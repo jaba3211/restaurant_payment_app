@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scan qr</title>
-    <!-- CSS only -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
     <link rel="stylesheet" href="CSS/style.css">
+
 </head>
 
 <body>
@@ -72,39 +71,38 @@
             </div>
         </nav>
     </header>
-    <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
-        <div class="container-fluid">
-            <div class="container">
-                <div class="d-flex align-items-center flex-column main-comps-container">
 
-                    <div class="row">
-                        <div class="col" style="padding:30px;">
-                            <h4> დაასკანერეთ QR კოდი, რათა იხილოთ რესტორნის მენიუ</h4>
-
-                        </div>
-                        <div class="col-12">
-                            <div id="reader"></div>
-                        </div>
-                        <div id="result">შედეგი</div>
-                    </div>
-                </div>
-
-            </div>
+    <!-- <div class="row">
+        <div class="col-md-6">
+            <video id="preview" width="100%"></video>
         </div>
-    </main>
+        <div class="col-md-6">
+            <label for="">scan qr code</label>
+            <input type="text" name="text" id="text" readonyy="" placeholder="scan qrcode" class="form-control">
+        </div>
+    </div> -->
 
-    <!-- <footer class="text-center container-fluid">
-        all rights reserved
-    </footer> -->
+    <div id="reader"></div>
+    <div class="linking text-center mt-5">
+        <a href="" id="link_to_menu" class="btn btn-success">გადადით ლინკზე</a>
+    </div>
     <script src="JS/html5-qrcode.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <!-- JavaScript Bundle with Popper -->
+    <script>
+        var linking = document.querySelector('.linking');
+        var linkToMenu = document.getElementById('link_to_menu');
+        function onScanSuccess(decodedText, decodedResult) {
+            // Handle on success condition with the decoded text or result.
+            linking.style.display = "block";
+            linkToMenu.href = decodedText;
+            html5QrcodeScanner.clear();
+        }
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-    <script src="JS/script.js"></script>
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+
 
 </body>
 

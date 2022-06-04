@@ -30,5 +30,13 @@ class PageController extends BaseController
         return view('modules.about_us');
     }
 
+    /**
+     * @return Application|Factory|View
+     */
+    public function QR()
+    {
+        return view('modules.frontend.QR.qr');
+    }
+
 
 }

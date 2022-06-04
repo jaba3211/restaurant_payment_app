@@ -65,7 +65,8 @@ Route::get('/bucket/remove', [BucketController::class,'remove'])->name('bucket.r
 Route::get('/bucket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel')->middleware('auth');
 /* orders */
 Route::get ('/orders/create', [OrdersController::class,'create'])->name('orders.create')->middleware('auth');
-
+/* QR */
+Route::get ('/scan/QR', [PageController::class,'QR'])->name('scan.QR');
 
 
 
