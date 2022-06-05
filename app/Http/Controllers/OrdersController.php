@@ -25,8 +25,10 @@ class OrdersController extends BaseController
     /**
      * @return Application|RedirectResponse|Redirector
      */
-    public function create()
+    public function create(Request $request)
     {
+        $restaurantId = $request->session()->get('restaurant_id');
+        $table = $request->session()->get('table');
         $bucket = \Cart::getContent();
         if (count($bucket) > 0){
             foreach ($bucket as $order){
@@ -34,8 +36,8 @@ class OrdersController extends BaseController
                     'dish_id' => $order->id,
                     'user_id' => auth()->id(),
                     'quantity' => $order->quantity,
-                    'restaurant_id' => 5,
-                    'table' => 1,
+                    'restaurant_id' => $restaurantId,
+                    'table' => $table,
                 ];
             }
             Orders::create($orders);

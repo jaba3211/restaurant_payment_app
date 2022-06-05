@@ -1,6 +1,6 @@
 @php
     $bucketUrl = auth()->check() ? route('bucket') : route('authorization');
-    $profileUrl = auth()->check() ? route('bucket') : route('authorization');
+    $profileUrl = auth()->check() ? route('profile') : route('authorization');
 @endphp
 
 <header>
@@ -51,12 +51,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ $bucketUrl }}">კალათა</a>
                             </li>
+                            <li class="nav-item">
+                            </li>
                         @endif
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit" style="background: #153a1e; color:#fff;">Search</button>
-                    </form>
+                    @include('widgets.search.forms')
                 </div>
             </div>
         </div>

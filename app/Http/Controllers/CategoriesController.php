@@ -146,9 +146,9 @@ class CategoriesController extends BaseController
         $row = $restaurant->getRestaurant($restaurant_id);
         if (empty($row)){
             return redirect(route('scan.QR'))->with('error', 'Incorrect restaurant id');
-        }else{
-            $this->data['list'] = $category->getCategories();
-            return view('modules.frontend.categories.wrapper', $this->data);
         }
+
+        $this->data['list'] = $category->getCategories();
+        return view('modules.frontend.categories.wrapper', $this->data);
     }
 }

@@ -53,8 +53,10 @@ class SessionsController extends BaseController
     /**
      * @return void
      */
-    public function logout()
+    public function logout(Request $request)
     {
+        $request->session()->forget('restaurant_id');
+         $request->session()->forget('table');
         auth()->logout();
 
         return redirect('/');

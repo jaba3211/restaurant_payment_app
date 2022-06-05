@@ -7,6 +7,7 @@ use App\Http\Controllers\DishesController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RestaurantsController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use \App\Http\Controllers\SessionsController;
@@ -20,9 +21,12 @@ use \App\Http\Controllers\SessionsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/* search */
+Route::get('/search', [SearchController::class,'search'])->name('search');
+/* pages, register and login, log out */
 Route::get('/', [PageController::class,'index'])->name('index');
 Route::get('/about_us', [PageController::class,'static'])->name('about_us');
+Route::get('/profile', [PageController::class,'profile'])->name('profile');
 Route::get('/register', [RegisterController::class,'index'])->name('registration');
 Route::get('/authorization', [AuthController::class,'index'])->name('authorization');
 Route::post('/register', [RegisterController::class,'create'])->name('register');
@@ -53,7 +57,7 @@ Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])-
 
 //----------------------------------------- frontend -----------------------------------------------------
 /* categories */
-Route::get ('/categories/{table}/{restautant_id}', [CategoriesController::class,'front'])->name('categories.front');
+Route::get ('/categories/{table}/{restaurant_id}', [CategoriesController::class,'front'])->name('categories.front');
 /* categories */
 Route::get ('/dishes/{category_id}', [DishesController::class,'front'])->name('dishes.front');
 Route::get ('/dishes/{dish_id}/{name?}', [DishesController::class,'show'])->name('dishes.show');
