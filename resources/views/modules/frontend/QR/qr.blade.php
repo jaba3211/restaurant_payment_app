@@ -21,7 +21,7 @@
             qrbox: 250
         });
     html5QrcodeScanner.render(onScanSuccess);
-  
+  //onscanError function should have
     html5QrcodeScanner.render(onScanSuccess, onScanError);
 </script>
 @endsection
