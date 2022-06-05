@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Restaurant;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,9 +20,10 @@ use Illuminate\Support\Facades\File;
 class CategoriesController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public $data;
 
-                                           /* backend */
+    /* backend */
 
     private $validationArray = [
         'name' => 'required|max:191',
@@ -35,7 +37,7 @@ class CategoriesController extends BaseController
     public function index(Category $category)
     {
         $this->data['list'] = $category->getCategories();
-        return view('modules.admin.categories.wrapper',$this->data);
+        return view('modules.admin.categories.wrapper', $this->data);
     }
 
     /**
@@ -44,17 +46,20 @@ class CategoriesController extends BaseController
     public function add(Category $category)
     {
         $this->data['templateName'] = 'create';
-        return view('modules.admin.categories.create',$this->data);
+        return view('modules.admin.categories.create', $this->data);
     }
 
     /**
-     * @return void
+     * @param Category $category
+     * @param Request $request
+     * @param $category_id
+     * @return Application|Factory|View
      */
     public function edit(Category $category, Request $request, $category_id)
     {
         $this->data['row'] = $category->getCategory($category_id);
         $this->data['templateName'] = 'update';
-        return view('modules.admin.categories.update',$this->data);
+        return view('modules.admin.categories.update', $this->data);
     }
 
     /**
@@ -83,16 +88,16 @@ class CategoriesController extends BaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Category $category ,Request $request)
+    public function update(Category $category, Request $request)
     {
         $id = $request->get('category_id');
         $row = $category->getCategory($id);
         $attributes = request()->validate($this->validationArray);
 
-        if(Empty($request->file('image'))){
+        if (empty($request->file('image'))) {
             $this->validationArray['image'] = '';
             $attributes = request()->validate($this->validationArray);
-        }else {
+        } else {
             if ($request->hasFile('image')) {
                 if (!empty($row->image) && File::exists(public_path('/storage/' . $row->image))) {
                     unlink(public_path('/storage/' . $row->image));
@@ -103,7 +108,7 @@ class CategoriesController extends BaseController
             } else
                 return redirect(route('categories.edit', ['category_id' => $id]))->with('error', 'Image does not upload');
         }
-        Category::where('id',$id)->update($attributes);
+        Category::where('id', $id)->update($attributes);
 
         return redirect('category/list');
     }
@@ -113,7 +118,7 @@ class CategoriesController extends BaseController
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function delete(Category $category,Request $request)
+    public function delete(Category $category, Request $request)
     {
         $id = $request->get('category_id');
         $row = $category->getCategory($id);
@@ -124,15 +129,26 @@ class CategoriesController extends BaseController
         return redirect('category/list');
     }
 
-                                          /* frontend */
+    /* frontend */
 
     /**
+     * @param Restaurant $restaurant
+     * @param Request $request
      * @param Category $category
-     * @return void
+     * @param $table
+     * @param $restaurant_id
+     * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function front(Category $category)
+    public function front(Restaurant $restaurant, Request $request, Category $category, $table, $restaurant_id)
     {
-        $this->data['list'] = $category->getCategories();
-        return view('modules.frontend.categories.wrapper',$this->data);
+        $request->session()->put('restaurant_id', $restaurant_id);
+        $request->session()->put('table', $table);
+        $row = $restaurant->getRestaurant($restaurant_id);
+        if (empty($row)){
+            return redirect(route('scan.QR'))->with('error', 'Incorrect restaurant id');
+        }else{
+            $this->data['list'] = $category->getCategories();
+            return view('modules.frontend.categories.wrapper', $this->data);
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,16 +12,27 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public $data;
+
+    public function __construct()
+    {
+        $this->data['restaurant_id'] = $this->getRestaurantIdFromSession();
+        $this->data['table'] = $this->getTableFromSession();
+    }
 
     /**
-     * @return bool
+     * @return mixed
      */
-    public function isInCart()
+    public function getRestaurantIdFromSession()
     {
-        $item = \Cart::getContent();
-        if (count($item) > 0)
-            return true;
-        else
-            return false;
+        return Request::session()->get('restaurant_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTableFromSession()
+    {
+        return Request::session()->get('table');
     }
 }

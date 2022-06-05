@@ -52,9 +52,10 @@ class Dish extends Authenticatable
      * @param $category_id
      * @return mixed
      */
-    public function getFrontList($category_id)
+    public function getFrontList($category_id, $restaurantId)
     {
         return $this->with(['restaurant'])
+            ->where('restaurant_id', $restaurantId)
             ->where('category_id', $category_id)->get();
     }
 

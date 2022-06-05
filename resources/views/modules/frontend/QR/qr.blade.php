@@ -2,9 +2,9 @@
 @section('content')
     <div id="reader"></div>
     <div class="linking text-center mt-5">
-        <a href="#" id="link_to_menu" class="btn btn-success">გადადით ლინკზე</a>
+        <a href="http://localhost:8000/categories/2/5" id="link_to_menu" class="btn btn-success">გადადით ლინკზე</a>
     </div>
-    <script src="JS/html5-qrcode.min.js"></script>
+    <script src="/html5-qrcode.min.js"></script>
     <script>
         var linking = document.querySelector('.linking');
         var linkToMenu = document.getElementById('link_to_menu');

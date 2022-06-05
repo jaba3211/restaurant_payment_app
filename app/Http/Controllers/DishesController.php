@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Dish;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -45,11 +46,10 @@ class DishesController extends BaseController
 
     /**
      * @param Dish $dish
-     * @param Request $request
      * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function index(Dish $dish, Request $request, $restaurant_id)
+    public function index(Dish $dish, $restaurant_id)
     {
         $this->data['list'] = $dish->getDishes($restaurant_id);
         $this->data['restaurant_id'] = $restaurant_id;
@@ -57,6 +57,7 @@ class DishesController extends BaseController
     }
 
     /**
+     * @param $restaurant_id
      * @return Application|Factory|View
      */
     public function add($restaurant_id)
@@ -65,7 +66,12 @@ class DishesController extends BaseController
         $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.dishes.create', $this->data);
     }
+
     /**
+     * @param Dish $dish
+     * @param Request $request
+     * @param $restaurant_id
+     * @param $dish_id
      * @return Application|Factory|View
      */
     public function edit(Dish $dish, Request $request, $restaurant_id, $dish_id)
@@ -98,7 +104,9 @@ class DishesController extends BaseController
     }
 
     /**
+     * @param Dish $dish
      * @param Request $request
+     * @param $restaurant_id
      * @return Application|RedirectResponse|Redirector
      */
     public function update(Dish $dish, Request $request, $restaurant_id)
@@ -152,21 +160,22 @@ class DishesController extends BaseController
     /**
      * @param Dish $dish
      * @param $category_id
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function front(Dish $dish,$category_id)
+    public function front(Dish $dish, $category_id, Request $request)
     {
-        $this->data['list'] = $dish->getFrontList($category_id);
+        $restaurantId = $request->session()->get('restaurant_id');
+        $this->data['list'] = $dish->getFrontList($category_id, $restaurantId);
         return view('modules.frontend.dishes.wrapper',$this->data);
     }
 
     /**
      * @param Dish $dish
      * @param $dish_id
-     * @param $name
      * @return Application|Factory|View
      */
-    public function show(Dish $dish, $dish_id, $name)
+    public function show(Dish $dish, $dish_id)
     {
         $this->data['row'] = $dish->getDish($dish_id);
         return view('modules.frontend.dishes.show',$this->data);
