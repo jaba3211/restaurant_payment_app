@@ -51,7 +51,7 @@
 
 /******************qr code******************/
 
-.result {
+/* .result {
   background-color: #153a1e;
   color: #fff;
   padding: 20px;
@@ -59,4 +59,7 @@
 }
 .row {
   display: flex;
+} */
+.linking{
+  display: none;
 }
