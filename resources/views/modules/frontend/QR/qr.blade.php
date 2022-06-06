@@ -10,6 +10,7 @@
         var linkToMenu = document.getElementById('link_to_menu');
         function onScanSuccess(decodedText, decodedResult) {
             // Handle on success condition with the decoded text or result.
+            console.log(decodedText);
             linking.style.display = "block";
             linkToMenu.href = decodedText;
             html5QrcodeScanner.clear();
