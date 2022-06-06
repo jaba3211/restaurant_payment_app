@@ -1,0 +1,15 @@
+@foreach($list as $row)
+    @php
+        $date = $row->created_at->format('d/m/Y H:m')
+    @endphp
+    <div class="card w-100 mb-3" style="background:#f2d4812e;">
+        <div class="card-body">
+            <div class="d-flex justify-content-between flex-wrap">
+                <h5 class="card-title">{{ $sums }}₾</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ $date }}</h6>
+            </div>
+            <p class="fw-bold">Cafe name: <span class="text-success">{{ $row->restaurant->name }}</span></p>
+            <a href="{{ route('orders.inside', ['date' => $row->created_at]) }}" class="card-link fw-bold d-block" style="color:#eaaa13;">See Order Details</a>
+        </div>
+    </div>
+@endforeach

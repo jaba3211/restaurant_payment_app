@@ -29,5 +29,6 @@
     html5QrcodeScanner.render(onScanSuccess);
     //onscanError function should have defined
     html5QrcodeScanner.render(onScanSuccess, onScanError);
+
 </script>
 @endsection

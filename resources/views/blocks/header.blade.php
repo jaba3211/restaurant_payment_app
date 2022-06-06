@@ -1,6 +1,7 @@
 @php
     $bucketUrl = auth()->check() ? route('bucket') : route('authorization');
     $profileUrl = auth()->check() ? route('profile') : route('authorization');
+    $orderUrl = auth()->check() ? route('orders') : route('authorization');
 @endphp
 
 <header>
@@ -50,6 +51,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ $bucketUrl }}">კალათა</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ $orderUrl }}">შეკვეთები</a>
                             </li>
                             <li class="nav-item">
                             </li>
