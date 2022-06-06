@@ -18,7 +18,7 @@
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "reader", { fps: 10, qrbox: 250 });
         html5QrcodeScanner.render(onScanSuccess);
-
+      //onscanError function should have defined
         html5QrcodeScanner.render(onScanSuccess, onScanError);
-    </script>
+</script>
 @endsection

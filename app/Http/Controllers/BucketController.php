@@ -43,6 +43,7 @@ class BucketController extends BaseController
     public function index()
     {
         $this->data['list'] = \Cart::getContent();
+        $this->data['sum'] = $this->sumOfDishes();
         return view('modules.frontend.bucket.wrapper', $this->data);
     }
 
@@ -63,10 +64,12 @@ class BucketController extends BaseController
     /**
      * @return Application|RedirectResponse|Redirector
      */
-    public function cancel()
+    public function cancel(Request $request)
     {
+        $table = $request->session()->get('table');
+        $restaurant_id = $request->session()->get('restaurant_id');
         \Cart::clear();
-        return redirect(route('categories.front'));
+        return redirect(route('categories.front',['table' => $table, 'restaurant_id' => $restaurant_id]));
     }
 
     /**
@@ -77,7 +80,23 @@ class BucketController extends BaseController
     {
         $dish_id = $request->get('dish_id');
 
-        \Cart::update($dish_id, ['quantity' =>['relative' => false, 'value' => $request->quantity]]);
+        \Cart::update($dish_id, ['quantity' => ['relative' => false, 'value' => $request->quantity]]);
         return redirect(route('bucket'));
+    }
+
+    /**
+     * @return int
+     */
+    public function sumOfDishes()
+    {
+        $list = \Cart::getContent();
+        $sum = 0;
+        if (!empty($list)) {
+            foreach ($list as $row) {
+                $sum += $row->price * $row->quantity;
+            }
+            return $sum;
+        }
+        return 0;
     }
 }

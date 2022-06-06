@@ -50,15 +50,6 @@
 
 
 /******************qr code******************/
-
-.result {
-  background-color: #153a1e;
-  color: #fff;
-  padding: 20px;
-  margin-top: 50px!important;
+.linking{
+  display: none;
 }
-.row {
-  display: flex;
-}
-
-
