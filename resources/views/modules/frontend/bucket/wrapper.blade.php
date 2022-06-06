@@ -5,9 +5,9 @@
             <div class="container">
                 @if(count($list) > 0)
                     <div class="d-flex align-items-center flex-column main-comps-container">
-                    <h2 class="menu_title my-5">
-                        თქვენი შეკვეთა
-                    </h2>
+                        <h2 class="menu_title my-5">
+                            თქვენი შეკვეთა
+                        </h2>
                         @if(!empty(session('error')))
                             <h2 style="color:red">
                                 {{ session('error') }}
@@ -16,7 +16,10 @@
                         @include('modules.frontend.bucket.list')
                         <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">შეკვეთის გაუქმება</a>
                         <a href="{{ route('orders.create') }}" class="btn btn-success mt-3">შეკვეთის დადასტურება</a>
-                </div>
+                    </div>
+                    <div class="order_price mt-3 fs-3">
+                        შეკვეთის ჯამი: <span class="text-danger fw-bold">{{ $sum }}₾</span>
+                    </div>
                 @else
                     @if(!empty(session('success')))
                         <h2 style="color:green">
