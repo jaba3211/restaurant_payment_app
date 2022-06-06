@@ -23,7 +23,7 @@ use \App\Http\Controllers\SessionsController;
 */
 /* search */
 Route::get('/search', [SearchController::class,'search'])->name('search');
-/* pages, register and login, log out */
+/* pages: register, login  and log out */
 Route::get('/', [PageController::class,'index'])->name('index');
 Route::get('/about_us', [PageController::class,'static'])->name('about_us');
 Route::get('/profile', [PageController::class,'profile'])->name('profile');
@@ -32,6 +32,7 @@ Route::get('/authorization', [AuthController::class,'index'])->name('authorizati
 Route::post('/register', [RegisterController::class,'create'])->name('register');
 Route::post('/authorization', [SessionsController::class,'create'])->name('log_in');
 Route::get('logout', [SessionsController::class,'logout'])->name('log_out');
+
 Route::group(['middleware' => 'auth'], function (){
     //----------------------------------------- admin -----------------------------------------------------
     /* restaurants */
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/basket/remove', [BucketController::class,'remove'])->name('bucket.remove');
     Route::get('/basket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel');
     /* orders */
+    Route::get ('/orders', [OrdersController::class,'index'])->name('orders');
+    Route::get ('/orders/{date}', [OrdersController::class,'show'])->name('orders.inside');
     Route::get ('/orders/create', [OrdersController::class,'create'])->name('orders.create');
 
 });
