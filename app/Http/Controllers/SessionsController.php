@@ -43,7 +43,7 @@ class SessionsController extends BaseController
             } elseif ($data->status_id == ADMIN) {
                 return redirect('restaurant/list');
             } elseif ($data->status_id == STAFF)
-                return redirect('/staff/orders');
+                return redirect('/staff/new/orders');
         } else
             throw ValidationException::withMessages(['username' => "your password or username is incorrect!"]);
 

@@ -10,6 +10,6 @@
         </div>
     </div>
     <div class="order mb-4 w-100">
-        <a href="{{ route('staff.orders.inside', ['table' => $row->table, 'date' => $row->created_at]) }}" class=" text-white btn btn-success w-100">See order</a>
+        <a href="{{ route('staff.new.orders.inside', ['table' => $row->table, 'date' => $row->created_at]) }}" class=" text-white btn btn-success w-100">See order</a>
     </div>
 @endforeach

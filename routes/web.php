@@ -71,8 +71,8 @@ Route::group(['middleware' => 'auth'], function (){
 
 //----------------------------------------- staff -----------------------------------------------------
     /* orders */
-    Route::get ('/staff/orders', [OrdersController::class,'staffIndex'])->name('staff.orders')->middleware('staff')->middleware('staff');
-    Route::get ('/staff/orders/{table}/{date}', [OrdersController::class,'staffShow'])->name('staff.orders.inside')->middleware('staff');
+    Route::get ('/staff/new/orders', [OrdersController::class,'staffIndex'])->name('staff.new.orders')->middleware('staff')->middleware('staff');
+    Route::get ('/staff/new/orders/{table}/{date}', [OrdersController::class,'staffShow'])->name('staff.new.orders.inside')->middleware('staff');
 });
 /* QR */
 Route::get ('/scan/QR', [PageController::class,'QR'])->name('scan.QR');

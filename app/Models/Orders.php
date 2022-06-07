@@ -63,6 +63,7 @@ class Orders extends Model
             'dish'
         ])
             ->where('restaurant_id',$restaurantId)
+            ->where('status_id', NEW_ORDER)
             ->groupBy('table')
             ->groupBy('created_at')
             ->get();
@@ -98,6 +99,7 @@ class Orders extends Model
            'dish'
        ])
            ->where('table', $table)
+           ->where('status_id', NEW_ORDER)
            ->where('created_at', $date)
            ->where('restaurant_id',$restaurantId)
            ->get();
