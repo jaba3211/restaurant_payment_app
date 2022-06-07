@@ -25,6 +25,7 @@ class OrdersController extends BaseController
     public $data;
 
 //-------------------------------------- frontend --------------------------------------
+
     /**
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
@@ -62,7 +63,6 @@ class OrdersController extends BaseController
         $userId = auth()->id();
         $restaurantId = $request->session()->get('restaurant_id');
         $this->data['list'] = $orders->getOrderdByList($userId, $restaurantId);
-        $this->data['sums'] = $this->getSum($userId, $restaurantId, $this->data['list'], $orders);
 
         return view('modules.frontend.orders.wrapper', $this->data);
     }
@@ -70,6 +70,7 @@ class OrdersController extends BaseController
     /**
      * @param Orders $orders
      * @param Request $request
+     * @param $date
      * @return Application|Factory|View
      */
     public function show(Orders $orders, Request $request, $date)
@@ -82,20 +83,8 @@ class OrdersController extends BaseController
         return view('modules.frontend.orders.show', $this->data);
     }
 
-    private function getSum($userId, $restaurantId, $orderByList, $orders)
-    {
-        $sums = 0;
-        foreach ($orderByList as $row){
-            $list = $orders->getList($userId, $restaurantId, $row->created_at);
-//            dd($list);
-            foreach ($list as $key => $item){
-                $sums += $item->dish->price * $item->quantity;
-            }
-        }
-        return $sums;
-    }
-
     /**
+     * @param $list
      * @return float|int
      */
     public function sumOfDishes($list)
