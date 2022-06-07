@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth'], function (){
     /* orders */
     Route::get ('/orders', [OrdersController::class,'index'])->name('orders');
     Route::get ('/orders/{date}', [OrdersController::class,'show'])->name('orders.inside');
-    Route::get ('/orders/create', [OrdersController::class,'create'])->name('orders.create');
+    Route::get ('/orders/column/create', [OrdersController::class,'create'])->name('orders.create');
 
 //----------------------------------------- staff -----------------------------------------------------
     /* orders */

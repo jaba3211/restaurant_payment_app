@@ -32,7 +32,6 @@ class OrdersController extends BaseController
      */
     public function create(Request $request)
     {
-//        dd('sadf');
         $restaurantId = $request->session()->get('restaurant_id');
         $table = $request->session()->get('table');
         $bucket = \Cart::getContent();
