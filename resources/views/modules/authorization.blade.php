@@ -7,7 +7,7 @@
                     <form action="{{ route('log_in') }}" method="POST" class="w-100">
                         @csrf
                         <h2 class="login_form_heading text-center mb-5">
-                            Authorization
+                            Sign In
                         </h2>
                         <div class="col-12 mb-3">
                             @if(!empty(session('error')))
@@ -42,12 +42,12 @@
                                 <input type="password" class="form-control" id="password" name="password" placeholder="password">
                             </div>
                         </div>
-                        <div class="mb-4">
-                            You are not registered ?
-                            <a href="{{ route('registration') }}" style="color:#f4c553;">register here !</a>
+                        <div class="mb-4 text-danger">
+                            Need an account ?
+                            <a href="{{ route('registration') }}" style="color:#f4c553;">Sign Up!</a>
                         </div>
 
-                        <button type="submit" class="btn" style="background:#153a1e; color:#fff">Log In</button>
+                        <button type="submit" class="btn" style="background:#153a1e; color:#fff">Sign In</button>
                     </form>
                 </div>
             </div>
