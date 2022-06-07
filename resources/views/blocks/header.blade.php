@@ -13,7 +13,7 @@
                 </a>
             @else
                 <a href="{{ route('log_out') }}" class="navbar-brand profile-icon ">
-                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                    <span class="glyphicon glyphicon-log-out"></span> Log Out
                 </a>
             @endif
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -31,29 +31,29 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     @if(auth()->check() and isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('restaurants') }}">რესტორნები</a>
+                                <a class="nav-link" href="{{ route('restaurants') }}">Restaurants</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('categories') }}">კატეგორიები</a>
+                                <a class="nav-link" href="{{ route('categories') }}">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">რეგისტრაცია</a>
+                                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('index') }}">მთავარი</a>
+                                <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('about_us') }}">ჩვენ შესახებ</a>
+                                <a class="nav-link" href="{{ route('about_us') }}">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ $profileUrl }}">პროფილი</a>
+                                <a class="nav-link" href="{{ $profileUrl }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ $bucketUrl }}">კალათა</a>
+                                <a class="nav-link" href="{{ $bucketUrl }}">Busket</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ $orderUrl }}">შეკვეთები</a>
+                                <a class="nav-link" href="{{ $orderUrl }}">Orders</a>
                             </li>
                             <li class="nav-item">
                             </li>
