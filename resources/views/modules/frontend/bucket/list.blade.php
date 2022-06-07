@@ -22,7 +22,7 @@
                         class="btn bg-light border rounded-circle d-flex justify-content-center align-items-center plus_btn"
                         style="width: 37px; height: 37px; font-size: 18px;">+</button>
                     <input type="submit" class="btn btn-info" value="რაოდენობის არჩება">
-                    <a href="{{ route('bucket.remove',['dish_id' => $row->id]) }}" class="btn btn-danger">წაშლა</a>
+                    <a href="{{ route('bucket.remove',['dish_id' => $row->id]) }}" class="btn btn-danger">DELETE</a>
             </div>
             </form>
         </span>

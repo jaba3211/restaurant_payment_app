@@ -10,7 +10,7 @@
                     </h2>
                     @else
                         <h2 class="menu_title my-5">
-                            კერძები არ არის!
+                            No Dishes!
                         </h2>
                     @endif
                     @include('modules.frontend.dishes.list')

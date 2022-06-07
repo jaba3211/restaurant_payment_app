@@ -21,11 +21,11 @@
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
                             <a href="{{ $url }}"
                                style="background: #153a1e; color:#fff;"
-                               class="btn">კალათაში დამატება
+                               class="btn">ADD TO CART
                             </a>
                         </div>
                     </div>
-                    <a href="{{ route('bucket') }}" class="btn" style="background: #f4c553; color:#fff;">შეკვეთის ნახვა</a>
+                    <a href="{{ route('bucket') }}" class="btn" style="background: #f4c553; color:#fff;">SEE ORDER</a>
                 </div>
             </div>
         </div>

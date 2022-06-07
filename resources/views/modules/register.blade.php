@@ -37,7 +37,7 @@
                         <p style="color: red">{{ $message }}</p>
                     @enderror
                     <div class="form-group mb-3">
-                        <input type="number" class="form-control" id="mobile_number" placeholder="Phone number" name="mobile_number" value="{{ old('mobile_number') }}">
+                        <input type="number" class="form-control" id="mobile_number" placeholder="Phone Number" name="mobile_number" value="{{ old('mobile_number') }}">
                     </div>
                     @error('password')
                         <p style="color: red">{{ $message }}</p>
@@ -49,7 +49,7 @@
                      <p style="color: red">{{ $message }}</p>
                     @enderror
                     <div class="form-group mb-3">
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repeat password">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repeat Password">
                     </div>
                     <button type="submit" class="btn" style="background:#153a1e; color:#fff">Sign Up</button>
                     <div class="my-3">

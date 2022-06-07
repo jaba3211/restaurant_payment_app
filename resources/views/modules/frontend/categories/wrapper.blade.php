@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="d-flex align-items-center flex-column main-comps-container">
                     <h2 class="menu_title my-5">
-                        მენიუ
+                        Menu
                     </h2>
                     @include('modules.frontend.categories.list')
                 </div>

@@ -11,7 +11,7 @@
                         <ion-icon name="restaurant-sharp"></ion-icon>
                     </div>
                     <div>
-                        <a href="{{ route('scan.QR') }}" class="btn btn-success scan_place">დაასკანერეთ ადგილი</a>
+                        <a href="{{ route('scan.QR') }}" class="btn btn-success scan_place">Scan Place</a>
                     </div>
                 </div>
             </div>

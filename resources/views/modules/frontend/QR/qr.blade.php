@@ -5,7 +5,7 @@
         <div class="container">
             <div id="reader"></div>
             <div class="linking text-center mt-5">
-                <a href="http://localhost:8000/categories/2/1" id="link_to_menu" class="btn btn-success">See Menu</a>
+                <a href="http://localhost:8000/categories/2/1" id="link_to_menu" class="btn btn-success">SEE MENU</a>
             </div>
         </div>
     </div>

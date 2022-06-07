@@ -8,7 +8,7 @@
                 </h2>
                 <div class="cards-group w-100">
                     @if(empty($list) || count($list) == 0)
-                        <h3 class="login_form_heading text-center my-4">No result!</h3>
+                        <h3 class="login_form_heading text-center my-4">No Results Match!</h3>
                     @else
                     @include('modules.frontend.search.list')
                     @endif
