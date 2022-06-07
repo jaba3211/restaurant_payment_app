@@ -15,7 +15,7 @@ class Admin
      */
     public function handle(Request $request, $next)
     {
-        if (auth()->id() != ADMIN){
+        if (auth()->user()->status_id != ADMIN){
             return redirect(route('index'));
         }
         return $next($request);

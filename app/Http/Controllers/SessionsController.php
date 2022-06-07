@@ -38,12 +38,12 @@ class SessionsController extends BaseController
         ]);
         if (auth()->attempt($attributes)) {
             $data = $user->getFilterUser($request->username);
-            if ($data->status_id == 0) {
+            if ($data->status_id == USER) {
                 return redirect('/');
-            } elseif ($data->status_id == 1) {
+            } elseif ($data->status_id == ADMIN) {
                 return redirect('restaurant/list');
-            } else
-                return redirect('/register');
+            } elseif ($data->status_id == STAFF)
+                return redirect('/staff/orders');
         } else
             throw ValidationException::withMessages(['username' => "your password or username is incorrect!"]);
 

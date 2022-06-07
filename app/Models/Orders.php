@@ -53,6 +53,22 @@ class Orders extends Model
     }
 
     /**
+     * @param $restaurantId
+     * @return Builder[]|Collection
+     */
+    public function getOrderdByTableList($restaurantId)
+    {
+        return $this->with([
+            'restaurant',
+            'dish'
+        ])
+            ->where('restaurant_id',$restaurantId)
+            ->groupBy('table')
+            ->groupBy('created_at')
+            ->get();
+    }
+
+    /**
      * @param $userId
      * @param $restaurantId
      * @param $date
@@ -69,4 +85,23 @@ class Orders extends Model
            ->where('restaurant_id',$restaurantId)
            ->get();
     }
+
+    /**
+     * @param $restaurantId
+     * @param $table
+     * @return Builder[]|Collection
+     */
+    public function getForStaff($restaurantId, $table, $date)
+    {
+       return $this->with([
+           'restaurant',
+           'dish'
+       ])
+           ->where('table', $table)
+           ->where('created_at', $date)
+           ->where('restaurant_id',$restaurantId)
+           ->get();
+    }
+
+
 }

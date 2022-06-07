@@ -32,6 +32,7 @@ class OrdersController extends BaseController
      */
     public function create(Request $request)
     {
+//        dd('sadf');
         $restaurantId = $request->session()->get('restaurant_id');
         $table = $request->session()->get('table');
         $bucket = \Cart::getContent();
@@ -99,5 +100,31 @@ class OrdersController extends BaseController
         return 0;
     }
 //-------------------------------------- staff --------------------------------------
+    /**
+     * @param Orders $orders
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function staffIndex(Orders $orders, Request $request)
+    {
+        $restaurantId = auth()->user()->restaurant_id;
+        $this->data['list'] = $orders->getOrderdByTableList($restaurantId);
 
+        return view('modules.staff.orders.wrapper', $this->data);
+    }
+
+    /**
+     * @param Orders $orders
+     * @param Request $request
+     * @param $date
+     * @return Application|Factory|View
+     */
+    public function staffShow(Orders $orders, $table, $date)
+    {
+        $restaurantId = auth()->user()->restaurant_id;
+        $this->data['list'] = $orders->getForStaff($restaurantId, $table, $date);
+        $this->data['sum'] = $this->sumOfDishes($this->data['list']);
+
+        return view('modules.staff.orders.show', $this->data);
+    }
 }

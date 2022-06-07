@@ -16,10 +16,9 @@ class Staff
      */
     public function handle(Request $request, $next)
     {
-        if (auth()->id() != STAFF){
+        if (auth()->user()->status_id != STAFF){
             return redirect(route('index'));
         }
         return $next($request);
-
     }
 }

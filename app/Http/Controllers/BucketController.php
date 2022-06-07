@@ -54,11 +54,13 @@ class BucketController extends BaseController
     public function remove(Request $request)
     {
         $dish_id = $request->get('dish_id');
+        $table = $request->session()->get('table');
+        $restaurant_id = $request->session()->get('restaurant_id');
         \Cart::remove($dish_id);
         if (count(\Cart::getContent()) > 0)
             return redirect(route('bucket'));
         else
-            return redirect(route('categories.front'));
+            return redirect(route('categories.front', ['table' => $table, 'restaurant_id' => $restaurant_id]));
     }
 
     /**

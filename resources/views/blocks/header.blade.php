@@ -1,7 +1,14 @@
 @php
+    $table = 0;
+    $restaurant_id = 0;
+    if (session('table') !== null && session('restaurant_id') !== null){
+        $table = session('table');
+        $restaurant_id = session('restaurant_id');
+    }
     $bucketUrl = auth()->check() ? route('bucket') : route('authorization');
     $profileUrl = auth()->check() ? route('profile') : route('authorization');
     $orderUrl = auth()->check() ? route('orders') : route('authorization');
+    $categoriesUrl = auth()->check() ? route('categories.front',['table' => $table, 'restaurant_id' => $restaurant_id]) : route('authorization');
 @endphp
 <header>
     <nav class="navbar navbar-light bg-light main_menu">
@@ -38,6 +45,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
                             </li>
+                        @elseif(auth()->check() and isStaff())
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
@@ -49,6 +60,9 @@
                                 <a class="nav-link" href="{{ $profileUrl }}">Profile</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ $categoriesUrl }}">Categories</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ $bucketUrl }}">Busket</a>
                             </li>
                             <li class="nav-item">
@@ -58,7 +72,9 @@
                             </li>
                         @endif
                     </ul>
-                    @include('widgets.search.forms')
+                    @if(!isStaff() && !isAdmin())
+                        @include('widgets.search.forms')
+                    @endif
                 </div>
             </div>
         </div>
