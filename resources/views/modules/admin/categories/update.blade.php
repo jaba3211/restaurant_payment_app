@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="d-flex align-items-center flex-column main-comps-container">
                     <h2 class="login_form_heading text-center mb-5">
-                        კატეგორიის განახლება
+                        Update Category
                     </h2>
                     @include('modules.admin.categories.forms')
                 </div>
