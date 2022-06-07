@@ -39,6 +39,14 @@
                     <div class="form-group mb-3">
                         <input type="number" class="form-control" id="mobile_number" placeholder="Phone Number" name="mobile_number" value="{{ old('mobile_number') }}">
                     </div>
+                    @if(isAdmin())
+                        <div class="form-group mb-3">
+                            <select class="form-select" aria-label="Default select example" name="restaurant_id" id="category_id">
+                                <option>Choose restaurant</option>
+                                @include('modules.restaurant_list')
+                            </select>
+                        </div>
+                    @endif
                     @error('password')
                         <p style="color: red">{{ $message }}</p>
                     @enderror

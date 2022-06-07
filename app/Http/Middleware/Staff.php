@@ -14,10 +14,12 @@ class Staff
     /**
      * @return Application|RedirectResponse|Redirector|void
      */
-    public function handle()
+    public function handle(Request $request, $next)
     {
         if (auth()->id() != STAFF){
             return redirect(route('index'));
         }
+        return $next($request);
+
     }
 }

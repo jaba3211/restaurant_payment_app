@@ -3,7 +3,6 @@
     $profileUrl = auth()->check() ? route('profile') : route('authorization');
     $orderUrl = auth()->check() ? route('orders') : route('authorization');
 @endphp
-
 <header>
     <nav class="navbar navbar-light bg-light main_menu">
         <div class="container-fluid">

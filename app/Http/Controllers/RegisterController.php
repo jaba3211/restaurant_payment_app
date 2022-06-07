@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -28,9 +29,10 @@ class RegisterController extends BaseController
     /**
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
-        return view('modules.register');
+        $this->data['list'] = $restaurant->getRestaurants();
+        return view('modules.register', $this->data);
     }
 
     /**
@@ -45,6 +47,7 @@ class RegisterController extends BaseController
 
             if (isAdmin()){
                 $attributes['status_id'] = STAFF;
+                $attributes['restaurant_id'] = $request->get('restaurant_id');
             }
             User::create($attributes);
         }else
