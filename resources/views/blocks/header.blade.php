@@ -43,7 +43,7 @@
                                 <a class="nav-link" href="{{ route('categories') }}">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                                <a class="nav-link" href="{{ route('staff.list') }}">Staff</a>
                             </li>
                         @elseif(auth()->check() and isStaff())
                             <li class="nav-item">

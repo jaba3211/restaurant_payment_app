@@ -8,6 +8,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use \App\Http\Controllers\SessionsController;
@@ -55,7 +56,14 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/dish/edit/{restaurant_id}/{dish_id}', [DishesController::class,'edit'])->name('dishes.edit')->middleware('admin');
     Route::post('/dish/create', [DishesController::class,'create'])->name('dishes.create')->middleware('admin');
     Route::get('/dish/delete', [DishesController::class,'delete'])->name('dishes.delete')->middleware('admin');
-    Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])->name('dishes.update')->middleware('admin');
+    Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])->name('di shes.update')->middleware('admin');
+    /* staff and users */
+    Route::get('/staff/list', [UsersController::class,'index'])->name('staff.list')->middleware('admin');
+    Route::get('/staff/edit/{username}', [UsersController::class,'edit'])->name('staff.edit')->middleware('admin');
+    Route::post('/staff/update/{username}', [UsersController::class,'update'])->name('staff.update')->middleware('admin');
+    Route::get('/staff/delete/{username}', [UsersController::class,'delete'])->name('staff.delete')->middleware('admin');
+
+
 
 //----------------------------------------- frontend -----------------------------------------------------
     /* bucket */

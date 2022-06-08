@@ -37,7 +37,7 @@ class SessionsController extends BaseController
             'password' => 'required',
         ]);
         if (auth()->attempt($attributes)) {
-            $data = $user->getFilterUser($request->username);
+            $data = $user->getUser($request->username);
             if ($data->status_id == USER) {
                 return redirect('/');
             } elseif ($data->status_id == ADMIN) {

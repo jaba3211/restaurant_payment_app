@@ -41,6 +41,7 @@ class CategoriesController extends BaseController
     }
 
     /**
+     * @param Category $category
      * @return Application|Factory|View
      */
     public function add(Category $category)

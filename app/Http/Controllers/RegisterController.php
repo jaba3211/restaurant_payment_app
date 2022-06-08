@@ -10,8 +10,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Redirector;
 
 class RegisterController extends BaseController
 {
@@ -32,6 +34,7 @@ class RegisterController extends BaseController
     public function index(Restaurant $restaurant)
     {
         $this->data['list'] = $restaurant->getRestaurants();
+        $this->data['templateName'] = 'create';
         return view('modules.register', $this->data);
     }
 
@@ -53,9 +56,35 @@ class RegisterController extends BaseController
         }else
             return redirect('/register')->withInput()->withErrors(['password'=>"passwords don't match"]);
         if (isAdmin()) {
-            return redirect('/register')->with('success', 'staff is registered!');
+            return redirect('/staff/list');
         }
         return redirect('/authorization')->with('success', 'You are registered!');
+
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Request $request)
+    {
+        $username = $request->get('username');
+        $attributes = request()->validate($this->validationArray);
+        if ($attributes['password'] === $request['confirm_password']){
+            unset($attributes['confirm_password']);
+            $attributes['password'] = bcrypt($attributes['password']);
+
+            if (isAdmin()){
+                $attributes['status_id'] = STAFF;
+                $attributes['restaurant_id'] = $request->get('restaurant_id');
+            }
+            User::where('username', $username)->updated($attributes);
+        }else
+            return redirect('/staff/edit')->withInput()->withErrors(['password'=>"passwords don't match"]);
+        if (isAdmin()) {
+            return redirect('/staff/list');
+        }
+        return redirect('/authorization')->with('success', 'Successfully updated!');
 
     }
 }
