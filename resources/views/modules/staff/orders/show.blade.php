@@ -12,7 +12,7 @@
                 <div class="order_price mt-3 fs-3">
                     Order price : <span class="text-danger fw-bold">{{ $sum }}₾</span>
                 </div>
-                <a class="btn btn-success mt-3">Submit order</a>
+                <a href="{{ route('staff.submit.order', ['date' => $date]) }}" class="btn btn-success mt-3">Submit order</a>
             </div>
 
         </div>

@@ -123,7 +123,14 @@ class OrdersController extends BaseController
         $restaurantId = auth()->user()->restaurant_id;
         $this->data['list'] = $orders->getForStaff($restaurantId, $table, $date);
         $this->data['sum'] = $this->sumOfDishes($this->data['list']);
+        $this->data['date'] = $date;
 
         return view('modules.staff.orders.show', $this->data);
+    }
+
+    public function submit($date)
+    {
+        Orders::where('created_at', $date)->update(['status_id' => OLD_ORDER]);
+        return redirect(route('staff.new.orders'));
     }
 }
