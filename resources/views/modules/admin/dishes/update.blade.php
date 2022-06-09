@@ -1,6 +1,5 @@
 @extends('parent')
 @section('content')
-    {{--    {{ dd($restaurant_id) }}--}}
     <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
         <div class="container-fluid">
             <div class="container">

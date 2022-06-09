@@ -29,6 +29,7 @@ class RegisterController extends BaseController
     ];
 
     /**
+     * @param Restaurant $restaurant
      * @return Application|Factory|View
      */
     public function index(Restaurant $restaurant)
@@ -39,7 +40,8 @@ class RegisterController extends BaseController
     }
 
     /**
-     * @return void
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
      */
     public function create(Request $request)
     {
@@ -66,25 +68,18 @@ class RegisterController extends BaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request)
+    public function update($username)
     {
-        $username = $request->get('username');
-        $attributes = request()->validate($this->validationArray);
-        if ($attributes['password'] === $request['confirm_password']){
-            unset($attributes['confirm_password']);
-            $attributes['password'] = bcrypt($attributes['password']);
+        $validationArray = [
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'username' => 'required|max:255|min:3',
+            'mobile_number' => 'required|min:9|max:11',
+            'restaurant_id' => 'required',
+        ];
+        $attributes = request()->validate($validationArray);
+        User::where('username', $username)->update($attributes);
 
-            if (isAdmin()){
-                $attributes['status_id'] = STAFF;
-                $attributes['restaurant_id'] = $request->get('restaurant_id');
-            }
-            User::where('username', $username)->updated($attributes);
-        }else
-            return redirect('/staff/edit')->withInput()->withErrors(['password'=>"passwords don't match"]);
-        if (isAdmin()) {
-            return redirect('/staff/list');
-        }
-        return redirect('/authorization')->with('success', 'Successfully updated!');
-
+        return redirect('/staff/list')->with('success', 'Staff is updated !');
     }
 }

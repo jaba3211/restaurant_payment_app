@@ -48,14 +48,6 @@ class UsersController extends BaseController
         $this->data['templateName'] = 'update';
         return view('modules.admin.staff.edit', $this->data);
     }
-    /**
-     * @return Application|Factory|View
-     */
-    public function update($username)
-    {
-        User::where('id', $username)->delete();
-        return view('modules.admin.staff.wrapper');
-    }
 
     /**
      * @param $staff_id
@@ -63,7 +55,39 @@ class UsersController extends BaseController
      */
     public function delete($username)
     {
-        User::where('id', $username)->delete();
+        User::where('username', $username)->delete();
         return redirect('/staff/list');
+    }
+
+    /**
+     * @param $username
+     * @return Application|Factory|View
+     */
+    public function editPassword($username)
+    {
+        $this->data['username'] = $username;
+        return view('modules.admin.staff.reset_password', $this->data);
+    }
+
+    /**
+     * @param Request $request
+     * @param $username
+     * @return Application|RedirectResponse|Redirector|void
+     */
+    public function updatePassword(Request $request, $username)
+    {
+        $validationArray = [
+            'password' => 'required|min:4|max:20',
+            'confirm_password' => 'required',
+        ];
+        $attributes = request()->validate($validationArray);
+        if ($attributes['password'] === $request['confirm_password']) {
+            unset($attributes['confirm_password']);
+            $attributes['password'] = bcrypt($attributes['password']);
+            User::where('username', $username)->update($attributes);
+
+            return redirect('/staff/list')->with('success', 'password is updated !');
+        }else
+            return redirect()->back()->withInput()->withErrors(['password'=>"passwords don't match"]);
     }
 }

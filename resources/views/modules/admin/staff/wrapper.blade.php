@@ -6,6 +6,9 @@
                 <div class="text-center  my-3">
                     <a href="{{ route('register') }}" class="btn btn-success">Add staff </a>
                 </div>
+                @if(!empty(session('success')))
+                    <h1 style="color: green">{{ session('success') }}</h1>
+                @endif
                 <div class="cards-group w-100">
                     @include('modules.admin.staff.list')
                 </div>

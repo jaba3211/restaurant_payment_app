@@ -24,7 +24,7 @@
     <div class="form-group mb-3">
         <label for="category_id" class="form-label">Category</label>
         <select class="form-select" aria-label="Default select example" name="category_id" id="category_id">
-            <option>Choose Category</option>
+            <option value="0">Choose Category</option>
             @include('modules.admin.dishes.category_list',
                  ['category_id' => $templateName == 'create'? '' : $row->category_id]
             )

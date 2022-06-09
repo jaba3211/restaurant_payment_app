@@ -115,7 +115,7 @@ class DishesController extends BaseController
         $this->data['row'] = $dish->getDish($id);
         $row = $this->data['row'];
         $attributes = request()->validate($this->validationArray);
-        $attributes['user_id'] = auth()->user()->id;
+        $attributes['user_id'] = auth()->id();
         $attributes['restaurant_id'] = $restaurant_id;
         if(Empty($request->file('image'))){
             $this->validationArray['image'] = '';
