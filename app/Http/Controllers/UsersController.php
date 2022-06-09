@@ -33,7 +33,23 @@ class UsersController extends BaseController
     public function index(User $user)
     {
         $this->data['list'] = $user->getUsers(STAFF);
-        return view('modules.admin.staff.wrapper', $this->data);
+        $this->data['templateName'] = 'staff';
+        return view('modules.admin.users.wrapper', $this->data);
+    }
+
+    /**
+     * @param User $user
+     * @return Application|Factory|View
+     */
+    public function userIndex(User $user)
+    {
+        $this->data['word'] = '';
+        if (!empty(Request()->get('search'))){
+            $this->data['word'] = Request()->get('search');
+        }
+        $this->data['list'] = $user->getUsers(USER);
+        $this->data['templateName'] = 'user';
+        return view('modules.admin.users.wrapper', $this->data);
     }
 
     /**
@@ -46,17 +62,24 @@ class UsersController extends BaseController
         $this->data['row'] = $user->getUser($username);
         $this->data['list'] = $restaurant->getRestaurants();
         $this->data['templateName'] = 'update';
-        return view('modules.admin.staff.edit', $this->data);
+        return view('modules.admin.users.edit', $this->data);
     }
 
     /**
-     * @param $staff_id
-     * @return Application|RedirectResponse|Redirector
+     * @param User $user
+     * @param $username
+     * @return Application|RedirectResponse|Redirector|void
      */
-    public function delete($username)
+    public function delete(User $user, $username)
     {
+        $row = $user->getUser($username);
         User::where('username', $username)->delete();
-        return redirect('/staff/list');
+
+        if($row->status_id == STAFF){
+            return redirect('/staff/list');
+        }elseif ($row->status_id == USER){
+            return redirect('/users/list');
+        }
     }
 
     /**
@@ -66,16 +89,18 @@ class UsersController extends BaseController
     public function editPassword($username)
     {
         $this->data['username'] = $username;
-        return view('modules.admin.staff.reset_password', $this->data);
+        return view('modules.admin.users.reset_password', $this->data);
     }
 
     /**
+     * @param User $user
      * @param Request $request
      * @param $username
      * @return Application|RedirectResponse|Redirector|void
      */
-    public function updatePassword(Request $request, $username)
+    public function updatePassword(User $user, Request $request, $username)
     {
+        $row = $user->getUser($username);
         $validationArray = [
             'password' => 'required|min:4|max:20',
             'confirm_password' => 'required',
@@ -86,7 +111,11 @@ class UsersController extends BaseController
             $attributes['password'] = bcrypt($attributes['password']);
             User::where('username', $username)->update($attributes);
 
-            return redirect('/staff/list')->with('success', 'password is updated !');
+            if($row->status_id == STAFF){
+                return redirect('/staff/list')->with('success', 'password is updated !');
+            }elseif ($row->status_id == USER){
+                return redirect('/users/list')->with('success', 'password is updated !');
+            }
         }else
             return redirect()->back()->withInput()->withErrors(['password'=>"passwords don't match"]);
     }

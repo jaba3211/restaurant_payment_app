@@ -57,15 +57,17 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/dish/create', [DishesController::class,'create'])->name('dishes.create')->middleware('admin');
     Route::get('/dish/delete', [DishesController::class,'delete'])->name('dishes.delete')->middleware('admin');
     Route::post('/dish/update/{restaurant_id}', [DishesController::class,'update'])->name('dishes.update')->middleware('admin');
-    /* staff and users */
+    /* staff */
     Route::get('/staff/list', [UsersController::class,'index'])->name('staff.list')->middleware('admin');
     Route::get('/staff/edit/{username}', [UsersController::class,'edit'])->name('staff.edit')->middleware('admin');
     Route::post('/staff/update/{username}', [RegisterController::class,'update'])->name('staff.update')->middleware('admin');
     Route::get('/staff/delete/{username}', [UsersController::class,'delete'])->name('staff.delete')->middleware('admin');
     Route::get('/staff/edit/password/{username}', [UsersController::class,'editPassword'])->name('staff.edit.password')->middleware('admin');
     Route::post('/staff/update/password/{username}', [UsersController::class,'updatePassword'])->name('staff.update.password')->middleware('admin');
-
-
+    /* users */
+    Route::get('/users/list', [UsersController::class,'userIndex'])->name('users.list')->middleware('admin');
+    Route::get('/users/edit/password/{username}', [UsersController::class,'editPassword'])->name('user.reset.password')->middleware('admin');
+    Route::post('/users/update/password/{username}', [UsersController::class,'updatePassword'])->name('users.update.password')->middleware('admin');
 
 //----------------------------------------- frontend -----------------------------------------------------
     /* bucket */

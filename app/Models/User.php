@@ -21,6 +21,16 @@ class User extends Authenticatable
         return $this->belongsTo(Restaurant::class, 'restaurant_id', 'id');
     }
 
+    public function scopeSearch($query)
+    {
+        $search = Request()->get('search');
+        if(!empty($search)) {
+            $query->where('firstname', 'like', '%' . $search . '%')
+                ->orWhere('lastname', 'like', '%' . $search . '%')
+                ->orWhere('username', 'like', '%' . $search . '%')
+                ->orWhere('mobile_number', 'like', '%' . $search . '%');
+        }
+    }
     /**
      * @param $username
      * @return mixed
@@ -38,6 +48,7 @@ class User extends Authenticatable
         return $this->with([
             'restaurant'
         ])
+            ->search()
             ->where('status_id', $statusId)->get();
     }
 }

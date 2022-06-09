@@ -45,6 +45,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('staff.list') }}">Staff</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.list') }}">Users</a>
+                            </li>
                         @elseif(auth()->check() and isStaff())
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('staff.new.orders') }}">New orders</a>
