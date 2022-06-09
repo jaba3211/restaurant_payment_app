@@ -1,6 +1,6 @@
 @foreach($list as $row)
     @php
-        $date = $row->created_at->format('d/m/Y H:m')
+        $date = $row->created_at->format('d/m/Y H:m:s')
     @endphp
     <div class="card w-100 mb-3" style="background:#f2d4812e;">
         <div class="card-body">

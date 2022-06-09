@@ -7,7 +7,7 @@
                     <h2 class="menu_title my-5">
                         table {{ $list[0]->table }}
                     </h2>
-                    @include('modules.staff.orders.show_list')
+                    @include('modules.staff.orders.new.show_list')
                 </div>
                 <div class="order_price mt-3 fs-3">
                     Order price : <span class="text-danger fw-bold">{{ $sum }}₾</span>

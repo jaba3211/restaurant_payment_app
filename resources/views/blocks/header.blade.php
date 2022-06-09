@@ -53,7 +53,7 @@
                                 <a class="nav-link active" aria-current="page" href="{{ route('staff.new.orders') }}">New orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ '' }}">Orders</a>
+                                <a class="nav-link active" aria-current="page" href="{{ route('staff.old.orders') }}">Orders</a>
                             </li>
                         @else
                             <li class="nav-item">

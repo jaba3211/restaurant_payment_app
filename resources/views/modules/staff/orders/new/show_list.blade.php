@@ -7,7 +7,7 @@
             <div class="text-warning">
                 {{ $row->dish->name }}
                 <div class="dish_price">
-                    <p class="raodenoba text-dark">Quantity: <span class="text-success">2</span></p>
+                    <p class="raodenoba text-dark">Quantity: <span class="text-success">{{ $row->quantity }}</span></p>
                     <span class="price_sum">{{ $row->quantity*$row->dish->price }}</span>
                     <span>₾</span>
                 </div>

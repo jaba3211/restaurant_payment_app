@@ -36,6 +36,14 @@ class Orders extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    /**
      * @param $userId
      * @param $restaurantId
      * @return Builder[]|Collection
@@ -44,7 +52,8 @@ class Orders extends Model
     {
        return $this->with([
            'restaurant',
-           'dish'
+           'dish',
+           'user'
        ])
            ->where('user_id',$userId)
            ->where('restaurant_id',$restaurantId)
@@ -56,14 +65,15 @@ class Orders extends Model
      * @param $restaurantId
      * @return Builder[]|Collection
      */
-    public function getOrderdByTableList($restaurantId)
+    public function getOrderdByTableList($restaurantId, $statusId)
     {
         return $this->with([
             'restaurant',
-            'dish'
+            'dish',
+            'user'
         ])
             ->where('restaurant_id',$restaurantId)
-            ->where('status_id', NEW_ORDER)
+            ->where('status_id', $statusId)
             ->groupBy('table')
             ->groupBy('created_at')
             ->get();
@@ -79,7 +89,8 @@ class Orders extends Model
     {
        return $this->with([
            'restaurant',
-           'dish'
+           'dish',
+           'user'
        ])
            ->where('created_at', $date)
            ->where('user_id',$userId)
@@ -90,16 +101,19 @@ class Orders extends Model
     /**
      * @param $restaurantId
      * @param $table
+     * @param $date
+     * @param $statusId
      * @return Builder[]|Collection
      */
-    public function getForStaff($restaurantId, $table, $date)
+    public function getForStaff($restaurantId, $table, $date, $statusId)
     {
        return $this->with([
            'restaurant',
-           'dish'
+           'dish',
+           'user'
        ])
            ->where('table', $table)
-           ->where('status_id', NEW_ORDER)
+           ->where('status_id', $statusId)
            ->where('created_at', $date)
            ->where('restaurant_id',$restaurantId)
            ->get();

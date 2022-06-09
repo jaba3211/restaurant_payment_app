@@ -7,7 +7,7 @@
                     <h2 class=" my-5 text-center">
                         Orders
                     </h2>
-                    @include('modules.staff.orders.list')
+                    @include('modules.staff.orders.new.list')
                 </div>
             </div>
         </div>

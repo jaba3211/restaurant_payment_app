@@ -107,9 +107,9 @@ class OrdersController extends BaseController
     public function staffIndex(Orders $orders, Request $request)
     {
         $restaurantId = auth()->user()->restaurant_id;
-        $this->data['list'] = $orders->getOrderdByTableList($restaurantId);
+        $this->data['list'] = $orders->getOrderdByTableList($restaurantId, NEW_ORDER);
 
-        return view('modules.staff.orders.wrapper', $this->data);
+        return view('modules.staff.orders.new.wrapper', $this->data);
     }
 
     /**
@@ -121,16 +121,46 @@ class OrdersController extends BaseController
     public function staffShow(Orders $orders, $table, $date)
     {
         $restaurantId = auth()->user()->restaurant_id;
-        $this->data['list'] = $orders->getForStaff($restaurantId, $table, $date);
+        $this->data['list'] = $orders->getForStaff($restaurantId, $table, $date, NEW_ORDER);
         $this->data['sum'] = $this->sumOfDishes($this->data['list']);
         $this->data['date'] = $date;
 
-        return view('modules.staff.orders.show', $this->data);
+        return view('modules.staff.orders.new.show', $this->data);
     }
 
     public function submit($date)
     {
         Orders::where('created_at', $date)->update(['status_id' => OLD_ORDER]);
         return redirect(route('staff.new.orders'));
+    }
+
+
+    /**
+     * @param Orders $orders
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function staffOldIndex(Orders $orders, Request $request)
+    {
+        $restaurantId = auth()->user()->restaurant_id;
+        $this->data['list'] = $orders->getOrderdByTableList($restaurantId, OLD_ORDER);
+
+        return view('modules.staff.orders.old.wrapper', $this->data);
+    }
+
+    /**
+     * @param Orders $orders
+     * @param Request $request
+     * @param $date
+     * @return Application|Factory|View
+     */
+    public function staffOldShow(Orders $orders, $table, $date)
+    {
+        $restaurantId = auth()->user()->restaurant_id;
+        $this->data['list'] = $orders->getForStaff($restaurantId, $table, $date, OLD_ORDER);
+        $this->data['sum'] = $this->sumOfDishes($this->data['list']);
+        $this->data['date'] = $date;
+
+        return view('modules.staff.orders.old.show', $this->data);
     }
 }
