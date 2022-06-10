@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use phpDocumentor\Reflection\Types\Resource_;
 
@@ -113,10 +114,39 @@ class UsersController extends BaseController
 
             if($row->status_id == STAFF){
                 return redirect('/staff/list')->with('success', 'password is updated !');
-            }elseif ($row->status_id == USER){
+            }elseif ($row->status_id == USER && auth()->user()->status_id == ADMIN){
                 return redirect('/users/list')->with('success', 'password is updated !');
+            }elseif (auth()->user()->status_id == USER){
+                return redirect('/profile')->with('success', 'Password is successfully updated !');
             }
         }else
             return redirect()->back()->withInput()->withErrors(['password'=>"passwords don't match"]);
+    }
+
+    public function confirm($username)
+    {
+       return view('modules.frontend.users.confirm_password', ['username' => $username]);
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request
+     * @param $username
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function confirmPass(User $user, Request $request, $username)
+    {
+        $validationArray = [
+            'password' => 'required',
+        ];
+        request()->validate($validationArray);
+
+        $row = $user->getUser($username);
+        $password = $request->get('password');
+        if (Hash::check($password, $row->password)){
+            return redirect(route('user.reset.password', ['username' => $row->username]));
+        }else{
+            return redirect()->back()->with('error', 'Incorrect password');
+        }
     }
 }

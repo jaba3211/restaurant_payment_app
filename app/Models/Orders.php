@@ -48,7 +48,7 @@ class Orders extends Model
      * @param $restaurantId
      * @return Builder[]|Collection
      */
-    public function getOrderdByList($userId, $restaurantId)
+    public function getOrderdByList($userId)
     {
        return $this->with([
            'restaurant',
@@ -56,7 +56,6 @@ class Orders extends Model
            'user'
        ])
            ->where('user_id',$userId)
-           ->where('restaurant_id',$restaurantId)
            ->groupBy('created_at')
            ->get();
     }
@@ -85,7 +84,7 @@ class Orders extends Model
      * @param $date
      * @return Builder[]|Collection
      */
-    public function getList($userId, $restaurantId, $date)
+    public function getList($userId, $date)
     {
        return $this->with([
            'restaurant',
@@ -94,7 +93,6 @@ class Orders extends Model
        ])
            ->where('created_at', $date)
            ->where('user_id',$userId)
-           ->where('restaurant_id',$restaurantId)
            ->get();
     }
 

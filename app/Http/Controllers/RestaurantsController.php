@@ -74,6 +74,7 @@ class RestaurantsController extends BaseController
     public function update(Request $request)
     {
         $id = $request->get('restaurant_id');
+        $this->validationArray['name'] = 'required';
         $attributes = request()->validate($this->validationArray);
         Restaurant::where('id',$id)->update($attributes);
 

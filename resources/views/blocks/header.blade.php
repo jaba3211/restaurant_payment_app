@@ -1,14 +1,8 @@
 @php
-    $table = 0;
-    $restaurant_id = 0;
-    if (session('table') !== null && session('restaurant_id') !== null){
-        $table = session('table');
-        $restaurant_id = session('restaurant_id');
-    }
+    $categoriesUrl = session('table') !== null && session('restaurant_id') !== null ? route('categories.front',['table' => session('table'), 'restaurant_id' => session('restaurant_id')]) : route('scan.QR');
     $bucketUrl = auth()->check() ? route('bucket') : route('authorization');
     $profileUrl = auth()->check() ? route('profile') : route('authorization');
     $orderUrl = auth()->check() ? route('orders') : route('authorization');
-    $categoriesUrl = auth()->check() ? route('categories.front',['table' => $table, 'restaurant_id' => $restaurant_id]) : route('authorization');
 @endphp
 <header>
     <nav class="navbar navbar-light bg-light main_menu">

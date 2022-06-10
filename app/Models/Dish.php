@@ -46,11 +46,11 @@ class Dish extends Model
     {
         if (!empty($search)){
             return $this->with(['category'])
+                ->where('restaurant_id', $restaurant_id)
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('price', 'like', '%' . $search . '%')
                 ->orWhere('short_desc', 'like', '%' . $search . '%')
                 ->orWhere('description', "like", "%" . $search . '%')
-                ->where('restaurant_id', $restaurant_id)
                 ->get();
         }
         return null;

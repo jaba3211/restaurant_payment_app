@@ -1,5 +1,8 @@
 @php
-    $url = $templateName == 'create' ? route('register') : route('staff.update', ['username' => $row->username]);
+    $url = $templateName == 'create' ? route('register') : route('user.update', ['username' => $row->username]);
+    if(auth()->check() && $templateName != 'create'){
+        $resetPssUrl = $row->status_id == USER ? route('user.confirm.password', ['username' => $row->username]) : route('staff.edit.password', ['username' => $row->username]);
+    }
 @endphp
 <form action="{{ $url }}" method="POST" class="w-100">
     @csrf
@@ -61,14 +64,14 @@
         </div>
     @endif
     <button type="submit" class="btn" style="background:#153a1e; color:#fff">{{ $templateName == 'create'? 'Sign Up' : 'update' }}</button>
-    @if($templateName == 'create')
+    @if($templateName == 'create' && auth()->check() == false)
         <div class="my-3">
             Already have an account?
             <a href="{{ route('authorization') }}" style="color: #ee9f4a;">Sign In</a>
         </div>
-    @else
+    @elseif(auth()->check() && $templateName != 'create')
         <div class="my-3">
-            <a href="{{ route('staff.edit.password', ['username' => $row->username]) }}" style="color: #ee9f4a;">Update password</a>
+            <a href="{{ $resetPssUrl }}" style="color: #ee9f4a;">Update password</a>
         </div>
     @endif
 </form>

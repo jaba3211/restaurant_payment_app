@@ -68,7 +68,7 @@ class RegisterController extends BaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update($username)
+    public function update(User $user, $username)
     {
         $validationArray = [
             'firstname' => 'required|max:255',
@@ -77,9 +77,17 @@ class RegisterController extends BaseController
             'mobile_number' => 'required|min:9|max:11',
             'restaurant_id' => 'required',
         ];
-        $attributes = request()->validate($validationArray);
-        User::where('username', $username)->update($attributes);
+        $row = $user->getUser($username);
+        if ($row->status_id == USER){
+            $validationArray['restaurant_id'] = '';
+            $attributes = request()->validate($validationArray);
+            User::where('username', $username)->update($attributes);
+            return redirect('/profile')->with('success', 'Successfully updated !');
+        }else{
+            $attributes = request()->validate($validationArray);
+            User::where('username', $username)->update($attributes);
+            return redirect('/staff/list')->with('success', 'Staff is updated !');
+        }
 
-        return redirect('/staff/list')->with('success', 'Staff is updated !');
     }
 }

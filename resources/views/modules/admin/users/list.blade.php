@@ -1,6 +1,6 @@
 @foreach($list as $row)
     @php
-        $url = $templateName == 'staff' ? route('staff.edit', ['username' => $row->username]) : route('user.reset.password', ['username' => $row->username]);
+        $url = $templateName == 'staff' ? route('user.edit', ['username' => $row->username]) : route('user.reset.password', ['username' => $row->username]);
         $buttonName = $templateName == 'staff' ? 'UPDATE' : 'RESET PASSWORD';
     @endphp
     <div class="card mb-2">
@@ -10,7 +10,7 @@
         @endif
         <div class="card-body">
             <a href="{{ $url }}" class="btn btn-warning">{{ $buttonName }}</a>
-            <a href="{{ route('staff.delete', ['username' => $row->username]) }}" class="btn btn-danger">DELETE</a>
+            <a href="{{ route('user.delete', ['username' => $row->username]) }}" class="btn btn-danger">DELETE</a>
         </div>
     </div>
 @endforeach

@@ -55,29 +55,25 @@ class OrdersController extends BaseController
 
     /**
      * @param Orders $orders
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index(Orders $orders, Request $request)
+    public function index(Orders $orders)
     {
         $userId = auth()->id();
-        $restaurantId = $request->session()->get('restaurant_id');
-        $this->data['list'] = $orders->getOrderdByList($userId, $restaurantId);
+        $this->data['list'] = $orders->getOrderdByList($userId);
 
         return view('modules.frontend.orders.wrapper', $this->data);
     }
 
     /**
      * @param Orders $orders
-     * @param Request $request
      * @param $date
      * @return Application|Factory|View
      */
-    public function show(Orders $orders, Request $request, $date)
+    public function show(Orders $orders, $date)
     {
         $userId = auth()->id();
-        $restaurantId = $request->session()->get('restaurant_id');
-        $this->data['list'] = $orders->getList($userId, $restaurantId, $date);
+        $this->data['list'] = $orders->getList($userId, $date);
         $this->data['sum'] = $this->sumOfDishes($this->data['list']);
 
         return view('modules.frontend.orders.show', $this->data);
