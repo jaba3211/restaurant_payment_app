@@ -23,43 +23,48 @@ class CategoriesController extends BaseController
 
     public $data;
 
-    /* backend */
+    // ----------------------------------------------------------  backend  --------------------------------------------------------
 
     private $validationArray = [
         'name' => 'required|max:191',
         'image' => 'image|mimes:jpeg,png,jpg,gif|nullable',
+        'restaurant_id' => '',
     ];
 
     /**
      * @param Category $category
+     * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function index(Category $category)
+    public function index(Category $category, $restaurant_id)
     {
-        $this->data['list'] = $category->getCategories();
+        $this->data['restaurant_id'] = $restaurant_id;
+        $this->data['list'] = $category->getCategories($restaurant_id);
         return view('modules.admin.categories.wrapper', $this->data);
     }
 
     /**
-     * @param Category $category
+     * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function add(Category $category)
+    public function add($restaurant_id)
     {
         $this->data['templateName'] = 'create';
+        $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.categories.create', $this->data);
     }
 
     /**
      * @param Category $category
-     * @param Request $request
      * @param $category_id
+     * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function edit(Category $category, Request $request, $category_id)
+    public function edit(Category $category,$restaurant_id, $category_id)
     {
         $this->data['row'] = $category->getCategory($category_id);
         $this->data['templateName'] = 'update';
+        $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.categories.update', $this->data);
     }
 
@@ -70,17 +75,16 @@ class CategoriesController extends BaseController
     public function create(Request $request)
     {
         $attributes = request()->validate($this->validationArray);
-
+        $restaurant_id = $request->get('restaurant_id');
+        $attributes['restaurant_id'] = $restaurant_id;
         if ($request->hasFile('image')) {
             $image = $request->file('image')->getClientOriginalName();
             $attributes['image'] = $image;
             $request->image->move(public_path('/storage'), $image);
-        } else
-            return redirect(route('categories.add'))->with('error', 'Image does not upload');
-
+        }
         Category::create($attributes);
 
-        return redirect('category/list');
+        return redirect(route('categories', ['restaurant_id' => $restaurant_id]));
 
     }
 
@@ -89,7 +93,7 @@ class CategoriesController extends BaseController
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Category $category, Request $request)
+    public function update(Category $category, Request $request, $restaurant_id)
     {
         $id = $request->get('category_id');
         $row = $category->getCategory($id);
@@ -111,7 +115,7 @@ class CategoriesController extends BaseController
         }
         Category::where('id', $id)->update($attributes);
 
-        return redirect('category/list');
+        return redirect(route('categories', ['restaurant_id' => $restaurant_id]))->with('success', 'The category was updated!');
     }
 
     /**
@@ -123,11 +127,12 @@ class CategoriesController extends BaseController
     {
         $id = $request->get('category_id');
         $row = $category->getCategory($id);
+        $restaurant_id = $row['restaurant_id'];
         if (!empty($row->image) && File::exists(public_path('/storage/' . $row->image))) {
             unlink(public_path('/storage/' . $row->image));
         }
         $row->delete();
-        return redirect('category/list');
+        return redirect(route('categories', ['restaurant_id' => $restaurant_id]));
     }
 
     /* frontend */
@@ -149,7 +154,7 @@ class CategoriesController extends BaseController
             return redirect(route('scan.QR'))->with('error', 'Incorrect restaurant id');
         }
 
-        $this->data['list'] = $category->getCategories();
+        $this->data['list'] = $category->getCategories($restaurant_id);
         return view('modules.frontend.categories.wrapper', $this->data);
     }
 }

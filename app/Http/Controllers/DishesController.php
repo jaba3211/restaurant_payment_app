@@ -37,19 +37,12 @@ class DishesController extends BaseController
     ];
 
     /**
-     * @param Category $category
-     */
-    public function __construct(Category $category)
-    {
-        $this->data['list'] = $category->getCategories();
-    }
-
-    /**
      * @param Dish $dish
+     * @param Category $category
      * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function index(Dish $dish, $restaurant_id)
+    public function index(Dish $dish, Category $category, $restaurant_id)
     {
         $this->data['list'] = $dish->getDishes($restaurant_id);
         $this->data['restaurant_id'] = $restaurant_id;
@@ -60,9 +53,10 @@ class DishesController extends BaseController
      * @param $restaurant_id
      * @return Application|Factory|View
      */
-    public function add($restaurant_id)
+    public function add(Category $category, $restaurant_id)
     {
         $this->data['templateName'] = 'create';
+        $this->data['list'] = $category->getCategories($restaurant_id);
         $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.dishes.create', $this->data);
     }
@@ -74,11 +68,13 @@ class DishesController extends BaseController
      * @param $dish_id
      * @return Application|Factory|View
      */
-    public function edit(Dish $dish, Request $request, $restaurant_id, $dish_id)
+    public function edit(Category $category, Dish $dish, $restaurant_id, $dish_id)
     {
         $this->data['templateName'] = 'update';
         $this->data['row'] = $dish->getDish($dish_id);
         $this->data['restaurant_id'] = $restaurant_id;
+        $this->data['categoryList'] = $category->getCategories($restaurant_id);
+
         return view('modules.admin.dishes.update', $this->data);
     }
 
@@ -96,8 +92,7 @@ class DishesController extends BaseController
             $image = $request->file('image')->getClientOriginalName();
             $attributes['image'] = $image;
             $request->image->move(public_path('/storage'), $image);
-        } else
-            return redirect(route('dishes.add',['restaurant_id' => $restaurant_id], $this->data))->withInput()->withErrors(['image' => "Image does not upload"]);
+        }
         Dish::create($attributes);
         return redirect(route('dishes.add', ['restaurant_id' => $restaurant_id]))->with('success', 'The dish was added!');
 

@@ -44,12 +44,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/restaurant/delete', [RestaurantsController::class,'delete'])->name('restaurants.delete')->middleware('admin');
     Route::post('/restaurant/update', [RestaurantsController::class,'update'])->name('restaurants.update')->middleware('admin');
     /* categories */
-    Route::get('/category/list', [CategoriesController::class,'index'])->name('categories')->middleware('admin');
-    Route::get('/category/add', [CategoriesController::class,'add'])->name('categories.add')->middleware('admin');
-    Route::get('/category/edit/{category_id}', [CategoriesController::class,'edit'])->name('categories.edit')->middleware('admin');
+    Route::get('/category/list/{restaurant_id}', [CategoriesController::class,'index'])->name('categories')->middleware('admin');
+    Route::get('/category/add/{restaurant_id}', [CategoriesController::class,'add'])->name('categories.add')->middleware('admin');
+    Route::get('/category/edit/{restaurant_id}/{category_id}', [CategoriesController::class,'edit'])->name('categories.edit')->middleware('admin');
     Route::post('/category/create', [CategoriesController::class,'create'])->name('categories.create')->middleware('admin');
     Route::get('/category/delete', [CategoriesController::class,'delete'])->name('categories.delete')->middleware('admin');
-    Route::post('/category/update', [CategoriesController::class,'update'])->name('categories.update')->middleware('admin');
+    Route::post('/category/update/{restaurant_id}', [CategoriesController::class,'update'])->name('categories.update')->middleware('admin');
     /* dishes */
     Route::get('/dish/list/{restaurant_id}', [DishesController::class,'index'])->name('dishes')->middleware('admin');
     Route::get('/dish/add/{restaurant_id}', [DishesController::class,'add'])->name('dishes.add')->middleware('admin');

@@ -19,13 +19,17 @@ class Category extends Model
     /**
      * @return void
      */
-    public function getCategories()
+    public function getCategories($restaurantId)
     {
-        return $this->all();
+        return $this->where('restaurant_id', $restaurantId)->get();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getCategory($id)
     {
-        return $this->where('id',$id)->first();
+        return $this->where('id', $id)->first();
     }
 }

@@ -1,8 +1,8 @@
 @php
     if($templateName == 'create'){
-        $url = route('categories.create');
+        $url = route('categories.create', ['restaurant_id' => $restaurant_id]);
     }elseif ($templateName == 'update'){
-        $url = route('categories.update', ['category_id' => $row->id]);
+        $url = route('categories.update', ['restaurant_id' => $restaurant_id, 'category_id' => $row->id]);
     }
 @endphp
 <form action="{{ $url }}" method="POST" class="w-100" enctype="multipart/form-data">
