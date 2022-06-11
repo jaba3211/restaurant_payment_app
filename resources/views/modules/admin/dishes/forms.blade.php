@@ -26,7 +26,7 @@
         <select class="form-select" aria-label="Default select example" name="category_id" id="category_id">
             <option value="0">Choose Category</option>
             @include('modules.admin.dishes.category_list',
-                 ['category_id' => $templateName == 'create'? '' : $row->category_id]
+                 ['category_id' => $templateName == 'create'? '' : $row->category_id, 'list' => $categoryList]
             )
         </select>
     </div>

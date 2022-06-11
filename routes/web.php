@@ -5,6 +5,7 @@ use App\Http\Controllers\BucketController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DishesController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\SearchController;
@@ -82,6 +83,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get ('/orders', [OrdersController::class,'index'])->name('orders');
     Route::get ('/orders/{date}', [OrdersController::class,'show'])->name('orders.inside');
     Route::get ('/orders/column/create', [OrdersController::class,'create'])->name('orders.create');
+    /* payment */
+    Route::get ('/payment/choose', [PaymentController::class,'index'])->name('payment.choose');
+    Route::post('/payment/confirm', [PaymentController::class,'pay'])->name('payment.confirm');
+
 
 //----------------------------------------- staff -----------------------------------------------------
     /* new orders */

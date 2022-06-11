@@ -15,32 +15,6 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Webwizo\Shortcodes\Facades\Shortcode;
 
-if (!function_exists('full_url')) {
-    /**
-     * @param bool $withHttp
-     * @param bool $withSlashOnEnd
-     * @return string
-     */
-    function full_url($withHttp = true, $withSlashOnEnd = false)
-    {
-        $slash = $withSlashOnEnd == true ? '/' : '';
-        $http = $withHttp == true ? 'http://' : '';
-
-        return env('APP_URL') . $slash;
-    }
-}
-
-if (!function_exists('storage_url')) {
-    /**
-     * @param string $src
-     * @return string
-     */
-    function storage_url($src = '')
-    {
-        return full_url(true, true) . $src;
-    }
-}
-
 if (!function_exists('isAdmin')) {
     /**
      * @return bool
