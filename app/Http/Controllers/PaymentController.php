@@ -24,6 +24,14 @@ class PaymentController extends BaseController
 
     public $data;
 
+    public $validationArray = [
+        'card_number' => 'required|max:19|min:19',
+        'full_name' => 'required',
+        'month' => 'required|numeric',
+        'year' => 'required',
+        'cvv' => 'required|numeric',
+    ];
+
     /**
      * @return Application|Factory|View
      */
@@ -46,11 +54,27 @@ class PaymentController extends BaseController
      */
     public function pay(Request $request)
     {
-       $paymentStatus = $request->get('pay');
-       if ($paymentStatus == 'in_cash'){
-           return redirect(route('orders.create'));
-       }else{
-           return redirect(route('pay.online'));
-       }
+        $paymentStatus = $request->get('pay');
+        if ($paymentStatus == 'in_cash') {
+            return redirect(route('orders.create'));
+        } else {
+            return redirect(route('pay.online'));
+        }
     }
+
+    public function submit()
+    {
+        $attributes = request()->validate($this->validationArray);
+        if (strlen($attributes['card_number']) != 19 and !is_numeric($attributes['card_number'])) {
+            return redirect(route('pay.online'))->withInput()->with(['error' => "card number is incorrect!"]);
+        } elseif (!($attributes['month'] <= 12) or !($attributes['month'] > 0) or strlen($attributes['month']) != 2) {
+            return redirect(route('pay.online'))->withInput()->with(['error' => "Incorrect Month input!"]);
+        } elseif (strlen($attributes['year']) != 2 or !($attributes['year'] > 0)) {
+            return redirect(route('pay.online'))->withInput()->with(['error' => "Incorrect input year!"]);
+        } elseif (strlen($attributes['cvv']) != 3 and strlen($attributes['cvv']) != 4 or !($attributes['cvv'] > 0)) {
+            return redirect(route('pay.online'))->withInput()->with(['error' => "Incorrect input cvv!"]);
+        }
+        return redirect(route('orders.create'))->with('success', 'The order is Successfully!');
+    }
+
 }
