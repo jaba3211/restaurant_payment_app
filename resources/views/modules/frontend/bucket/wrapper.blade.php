@@ -16,7 +16,6 @@
                         @include('modules.frontend.bucket.list')
                         <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">DELETE ORDER</a>
                         <a href="{{ route('payment.choose') }}" class="btn btn-success mt-3">CONFIRM ORDER</a>
-{{--                        <a href="{{ route('orders.create') }}" class="btn btn-success mt-3">CONFIRM ORDER</a>--}}
                     </div>
                     <div class="order_price mt-3 fs-3">
                         Order Sum: <span class="text-danger fw-bold">{{ $sum }}₾</span>

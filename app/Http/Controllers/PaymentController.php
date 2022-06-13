@@ -33,6 +33,14 @@ class PaymentController extends BaseController
     }
 
     /**
+     * @return Application|Factory|View
+     */
+    public function show()
+    {
+        return view('modules.frontend.payment.show');
+    }
+
+    /**
      * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
@@ -42,7 +50,7 @@ class PaymentController extends BaseController
        if ($paymentStatus == 'in_cash'){
            return redirect(route('orders.create'));
        }else{
-           return redirect(route(''));
+           return redirect(route('pay.online'));
        }
     }
 }

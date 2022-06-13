@@ -87,6 +87,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get ('/payment/choose', [PaymentController::class,'index'])->name('payment.choose');
     Route::post('/payment/confirm', [PaymentController::class,'pay'])->name('payment.confirm');
 
+    Route::get ('/pay/online', [PaymentController::class,'show'])->name('pay.online');
+    Route::post('/payment/submit', [PaymentController::class,'submit'])->name('payment.submit');
+
 
 //----------------------------------------- staff -----------------------------------------------------
     /* new orders */

@@ -56,7 +56,7 @@ class DishesController extends BaseController
     public function add(Category $category, $restaurant_id)
     {
         $this->data['templateName'] = 'create';
-        $this->data['list'] = $category->getCategories($restaurant_id);
+        $this->data['categoryList'] = $category->getCategories($restaurant_id);
         $this->data['restaurant_id'] = $restaurant_id;
         return view('modules.admin.dishes.create', $this->data);
     }
