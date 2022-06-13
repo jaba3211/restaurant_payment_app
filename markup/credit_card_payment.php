@@ -63,28 +63,28 @@
         <div class="container-fluid">
             <div class="container">
                 <div class="d-flex align-items-center flex-column main-comps-container">
-                    <h2 class="login_form_heading text-center mb-5 text-danger">
+                    <h2 class="login_form_heading text-center mb-5 text-warning">
                         Payment Details
                     </h2>
                     <form action="#" method="POST" class="w-100">
                         <div class="form-group mb-3 card_number_box">
-                            <label for="card_number" class="form-label text-danger fw-bold">Card Number</label>
+                            <label for="card_number" class="form-label text-warning fw-bold">Card Number</label>
                             <p class="text-secondary">Enter the 16-digit card number on the card</p>
                             <input type="text" class="form-control" id="card_number"
                                 placeholder="XXXX - XXXX - XXXX - XXXX">
                         </div>
                         <div class="form-group mb-3 card_name_box">
-                            <label for="card_name" class="form-label text-danger fw-bold">Card Name Holder</label>
+                            <label for="card_name" class="form-label text-warning fw-bold">Card Name Holder</label>
                             <p class="text-secondary">Enter name card holder on the card</p>
                             <input type="text" class="form-control" id="card_name" autocomplete="off" required>
                         </div>
                         <div class="form-group mb-3 card_cvv_box">
-                            <label for="card_cvv" class="form-label text-danger fw-bold">CVV Number</label>
+                            <label for="card_cvv" class="form-label text-warning fw-bold">CVV Number</label>
                             <p class="text-secondary">Enter the 3 or 4 digits number on the card</p>
                             <input type="number" data-maxlength="4" class="form-control" id="card_cvv" required>
                         </div>
                         <div class="form-group mb-3 card_expdate_box">
-                            <label for="card_expdate" class="form-label text-danger fw-bold">Expire Date</label>
+                            <label for="card_expdate" class="form-label text-warning fw-bold">Expire Date</label>
                             <p class="text-secondary">Enter the expiration date of the card</p>
                             <div class="d-flex" id="card_expdate">
                                 <input type="number" style="width: 60px;" data-maxlength="2" class="form-control" id="card_month"
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="text-center w-100">
-                            <button type="submit" class="btn btn-danger mt-2">Pay Now</button>
+                            <button type="submit" class="btn btn-warning mt-2">Pay Now</button>
                         </div>
                     </form>
                 </div>
