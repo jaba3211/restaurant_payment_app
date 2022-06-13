@@ -27,7 +27,7 @@
                         </h2>
                     @endif
                     <div class="d-flex align-items-center flex-column main-comps-container">
-                        <h2 class="menu_title my-5">Busket is empty</h2>
+                        <h2 class="menu_title my-5 text-danger">Busket is empty!</h2>
                     </div>
                 @endif
             </div>
