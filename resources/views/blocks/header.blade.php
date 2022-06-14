@@ -13,7 +13,7 @@
                 </a>
             @else
                 <a href="{{ route('log_out') }}" class="navbar-brand profile-icon ">
-                    <span class="glyphicon glyphicon-log-out"></span> Log Out
+                <ion-icon name="exit" size="large"></ion-icon>
                 </a>
             @endif
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
