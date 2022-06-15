@@ -1,5 +1,5 @@
 @foreach($list as $row)
-    <a href="{{ route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]) }}" class="text-decoration-none">
+    <a href="{{ route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]) }}" class="text-decoration-none d-block w-100">
         <div class="dishes d-flex align-items-center w-100 card mb-3 shadow-sm flex-row">
             <span>
                 <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="200">

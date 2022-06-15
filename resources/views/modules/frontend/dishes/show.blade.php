@@ -4,7 +4,7 @@
         $url = auth() ? route('bucket.add',['dish_id' => $row->id]) : route('authorization')
     @endphp
     <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
-        <div class="container-fluid">
+        <div class="container-fluid mb-3">
             <div class="container">
                 <div class="d-flex align-items-center flex-column main-comps-container">
                     <h2 class="menu_title my-5">
@@ -13,10 +13,10 @@
                     @if(!empty(session('success')))
                         <h1 style="color: green">{{ session('success') }}</h1>
                     @endif
-                    <div class="card mb-3">
+                    <div class="card mb-3"  style="width:85%">
                         <img src="{{ url('/storage/'.$row->image) }}" class="card-img-top" alt="{{ $row->name }}">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: #153a1e;">{{ $row->name }}</h5>
+                            <h5 class="card-title" style="color: #ef9e4c;">{{ $row->name }}</h5>
                             <p class="card-text">{{ $row->description }}</p>
                             <h4 class="card-text" style="color: #f4c553">{{ $row->price }}₾</h4>
                             <a href="{{ $url }}"
