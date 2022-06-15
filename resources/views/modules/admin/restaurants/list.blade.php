@@ -5,8 +5,8 @@
         <div class="card-body">
             <a href="{{ route('restaurants.edit', ['restaurant_id' => $row['id']]) }}" class="btn btn-warning">UPDATE</a>
             <a href="{{ route('restaurants.delete', ['restaurant_id' => $row['id']]) }}" class="btn btn-danger">DELETE</a>
-            <a href="{{ route('dishes', ['restaurant_id' => $row['id']]) }}" class="btn btn-primary">DISHES</a>
-            <a href="{{ route('categories', ['restaurant_id' => $row['id']]) }}" class="btn btn-secondary">CATEGORIES</a>
+            <a href="{{ route('dishes', ['restaurant_id' => $row['id']]) }}" class="btn btn-primary"  style="background:#f0bb18; border:0;">DISHES</a>
+            <a href="{{ route('categories', ['restaurant_id' => $row['id']]) }}" class="btn btn-secondary" style="background:#73ee73; border:0;">CATEGORIES</a>
         </div>
     </div>
 @endforeach
