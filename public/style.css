@@ -57,6 +57,24 @@
     width: 500px;
     margin: 0 auto;
 }
+#reader__dashboard_section_csr > span:nth-child(2) > button:nth-child(2){
+   
+    border: 0;
+    padding: 7px 10px;
+    margin-top: 5px;
+    background: #DC3545;
+    color: white;
+}
+#reader__camera_permission_button{
+    border: 0;
+    padding: 7px 10px;
+    margin-top: 5px;
+    background: #28A745;
+    color: white;
+}
+#reader__dashboard_section_swaplink{
+    color: #ef9e4c;
+}
 
 /* responsive for qr */
 
