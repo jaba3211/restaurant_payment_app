@@ -56,8 +56,10 @@ class PaymentController extends BaseController
     {
         $paymentStatus = $request->get('pay');
         if ($paymentStatus == 'in_cash') {
+            $request->session()->put('payment', IN_CACHE);
             return redirect(route('orders.create'));
         } else {
+            $request->session()->put('payment', BY_CARD);
             return redirect(route('pay.online'));
         }
     }

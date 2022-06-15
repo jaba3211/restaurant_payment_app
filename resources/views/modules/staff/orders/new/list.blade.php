@@ -7,6 +7,9 @@
             <span class="fs-3 d-block">
                 Table {{ $row->table }}
             </span>
+            <span class="fs-3 d-block mt-3 text-danger fw-bold">
+                {{ $row->payment_id == IN_CACHE ? 'In cache' : 'By card'  }}
+            </span>
         </div>
     </div>
     <div class="order mb-4 w-100">

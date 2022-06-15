@@ -5,6 +5,7 @@
     <div class="card w-100 mb-3" style="background:#f2d4812e;">
         <div class="card-body">
             <div class="d-flex justify-content-between flex-wrap">
+                <h5 class="card-title text-success">{{ $row->payment_id == IN_CACHE ? 'In cache' : 'By card' }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ $date }}</h6>
             </div>
             <p class="fw-bold">Restaurant Name: <span class="text-success">{{ $row->restaurant->name }}</span></p>

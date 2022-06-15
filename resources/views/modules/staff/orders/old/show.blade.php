@@ -4,8 +4,11 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center flex-column main-comps-container">
                 <h2 class="login_form_heading text-center my-4">
-                    Table {{ $list[0]->table }} ORDER
+                    TABLE {{ $list[0]->table }} ORDER
                 </h2>
+                <span class="fs-3 d-block mt-3 text-danger fw-bold">
+                        {{ $list[0]->payment_id == IN_CACHE ? 'In cache' : 'By card'  }}
+                </span>
                 <div class="cards-group w-100 mt-3">
                     @include('modules.staff.orders.old.show_list')
                 </div>

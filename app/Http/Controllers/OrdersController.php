@@ -34,6 +34,7 @@ class OrdersController extends BaseController
     {
         $restaurantId = $request->session()->get('restaurant_id');
         $table = $request->session()->get('table');
+        $paymentId = $request->session()->get('payment');
         $bucket = \Cart::getContent();
         if (count($bucket) > 0){
             foreach ($bucket as $order){
@@ -43,9 +44,11 @@ class OrdersController extends BaseController
                     'quantity' => $order->quantity,
                     'restaurant_id' => $restaurantId,
                     'table' => $table,
+                    'payment_id' => $paymentId,
                 ];
             Orders::create($orders);
             }
+            $request->session()->forget('payment');
             \Cart::clear();
         }else
              return redirect(route('bucket'))->with('error','Something went wrong!');

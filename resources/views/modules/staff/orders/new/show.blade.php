@@ -7,6 +7,9 @@
                     <h2 class="menu_title my-5">
                         table {{ $list[0]->table }}
                     </h2>
+                    <span class="fs-3 d-block mt-3 text-danger fw-bold">
+                        {{ $list[0]->payment_id == IN_CACHE ? 'In cache' : 'By card'  }}
+                    </span>
                     @include('modules.staff.orders.new.show_list')
                 </div>
                 <div class="order_price mt-3 fs-3">
