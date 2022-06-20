@@ -9,6 +9,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{ $date }}</h6>
             </div>
             <p class="fw-bold">Ordered by <span class="text-success">{{ $row->user->username }}</span></p>
+            <p class="fw-bold">Staff: <span class="text-danger">{{ $row->staff->username }}</span></p>
             <span class="fs-3 d-block mt-3 text-danger fw-bold">
                 {{ $row->payment_id == IN_CACHE ? 'In cache' : 'By card'  }}
             </span>

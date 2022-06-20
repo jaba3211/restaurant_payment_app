@@ -129,7 +129,11 @@ class OrdersController extends BaseController
 
     public function submit($date)
     {
-        Orders::where('created_at', $date)->update(['status_id' => OLD_ORDER]);
+        Orders::where('created_at', $date)
+            ->update([
+                'status_id' => OLD_ORDER,
+                'staff_id' => auth()->id(),
+            ]);
         return redirect(route('staff.new.orders'));
     }
 

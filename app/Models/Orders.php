@@ -44,6 +44,14 @@ class Orders extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function staff()
+    {
+        return $this->belongsTo(User::class,'staff_id','id');
+    }
+
+    /**
      * @param $userId
      * @param $restaurantId
      * @return Builder[]|Collection
