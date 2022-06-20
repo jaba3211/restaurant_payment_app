@@ -93,20 +93,17 @@
     justify-content: space-between;
     display: none;
 }
-.show {
+.my_show {
     display: flex;
     position: fixed;
-    /* -webkit-animation: fadeInn 1s;
-    animation: fadeInn 1s; */
+    -webkit-animation: fadeInn 1s;
+    animation: fadeInn 1s;
 }
-/* body{
-    position: relative;
-} */
+
 .body_wrapper::after {
     content: "";
-    background: rgba(0, 0, 0, 0.228);
+    background: rgba(0, 0, 0, 0.4);
     position: fixed;
-    /* z-index: 11111; */
     top: 0;
     left: 0;
     width: 100%;
@@ -115,6 +112,7 @@
 }
 .modal_top {
     padding-bottom: 12px;
+    padding-top: 7px;
     border-bottom: 0.5px solid rgba(81, 81, 81, 0.603);
 }
 .close_btn {
@@ -122,7 +120,7 @@
 }
 
 /* Add animation (fade in the popup) */
-/* @-webkit-keyframes fadeInn {
+@-webkit-keyframes fadeInn {
     from {
         opacity: 0;
     }
@@ -138,7 +136,7 @@
     to {
         opacity: 1;
     }
-} */
+}
 
 /* responsive for qr */
 
