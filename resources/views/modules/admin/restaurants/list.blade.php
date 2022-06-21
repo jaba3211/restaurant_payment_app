@@ -4,10 +4,7 @@
     <h6 class="card-header text-info bg-transparent">ID: {{ $row->id }}</h6>
     <div class="card-body">
         <!-- Button trigger modal -->
-        <!-- <button class="btn btn-danger delete">
-            DELETE
-        </button> -->
-        <div class="btn btn-danger delete">delete</div>
+        <div class="btn btn-danger delete">DELETE</div>
         <!-- Modal -->
         <div class="delete_modal">
             <div class="modal_top d-flex justify-content-between">
