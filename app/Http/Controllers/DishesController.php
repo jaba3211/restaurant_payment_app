@@ -28,7 +28,7 @@ class DishesController extends BaseController
 
     private $validationArray = [
         'name' => 'required|max:191',
-        'price' => 'required',
+        'price' => 'required|numeric',
         'image' => 'image|mimes:jpeg,png,jpg,gif',
         'description' => '',
         'short_desc' => '',

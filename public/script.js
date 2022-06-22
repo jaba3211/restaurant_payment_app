@@ -25,3 +25,10 @@
 
     });
    
+    var dish_check_inputs=document.querySelectorAll('.dish_check_input');
+    var add_check_btn=document.querySelector('.add_check_btn');
+    dish_check_inputs.forEach(e => {
+      e.oninput=function(){
+        add_check_btn.style.display="block";
+      }
+    });

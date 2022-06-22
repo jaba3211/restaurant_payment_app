@@ -35,7 +35,7 @@
     @enderror
     <div class="form-group mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="price" name="price" id="price" class="form-control"
+        <input type="text" name="price" id="price" class="form-control"
            value="{{ $templateName == 'create'? old('price') : $row->price }}"
         >
     </div>

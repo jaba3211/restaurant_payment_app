@@ -120,15 +120,14 @@
 }
 /*see menu button styles*/
 
-  
-  .wrap {
+.wrap {
     height: 100%;
     display: none;
     align-items: center;
     justify-content: center;
-  }
-  
-  .see_menu_btn {
+}
+
+.see_menu_btn {
     min-width: 300px;
     min-height: 60px;
     font-size: 22px;
@@ -137,7 +136,7 @@
     font-weight: 700;
     color: #313133;
     background: #5af590;
-  background: linear-gradient(-90deg, #1b8340 0%, #5af590 100%);
+    background: linear-gradient(-90deg, #1b8340 0%, #5af590 100%);
     border: none;
     border-radius: 1000px;
     box-shadow: 12px 12px 24px #2ab15954;
@@ -146,10 +145,10 @@
     outline: none;
     position: relative;
     padding: 10px;
-    }
-  
-    .see_menu_btn::before {
-  content: '';
+}
+
+.see_menu_btn::before {
+    content: "";
     border-radius: 1000px;
     min-width: calc(300px + 12px);
     min-height: calc(60px + 12px);
@@ -160,21 +159,24 @@
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
-    transition: all .3s ease-in-out 0s;
-  }
-  
-  .see_menu_btn:hover, .see_menu_btn:focus {
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.see_menu_btn:hover,
+.see_menu_btn:focus {
     color: #313133;
     transform: translateY(-6px);
-  }
-  
-  .see_menu_btn:hover::before, .see_menu_btn:focus::before {
+}
+
+.see_menu_btn:hover::before,
+.see_menu_btn:focus::before {
     opacity: 1;
-  }
-  
-  .see_menu_btn::after {
-    content: '';
-    width: 30px; height: 30px;
+}
+
+.see_menu_btn::after {
+    content: "";
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
     border: 6px solid #2ab159;
     position: absolute;
@@ -183,26 +185,36 @@
     left: 50%;
     transform: translate(-50%, -50%);
     animation: ring 1.5s infinite;
-  }
-  
-  .see_menu_btn:hover::after, .see_menu_btn:focus::after {
+}
+
+.see_menu_btn:hover::after,
+.see_menu_btn:focus::after {
     animation: none;
     display: none;
-  }
-  
-  @keyframes ring {
+}
+
+@keyframes ring {
     0% {
-      width: 30px;
-      height: 30px;
-      opacity: 1;
+        width: 30px;
+        height: 30px;
+        opacity: 1;
     }
     100% {
-      width: 300px;
-      height: 300px;
-      opacity: 0;
+        width: 300px;
+        height: 300px;
+        opacity: 0;
     }
-  }
-
+}
+.dish_check_input {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+}
+.add_check_btn{
+display: none;
+}
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeInn {
     from {
@@ -221,9 +233,6 @@
         opacity: 1;
     }
 }
-
-
-
 
 /* responsive for qr */
 
