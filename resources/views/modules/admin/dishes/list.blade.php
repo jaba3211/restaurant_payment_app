@@ -1,8 +1,12 @@
 @foreach($list as $row)
-    <div class="card mb-2 mycard">
-        <h5 class="card-header">{{ $row->name }}</h5>
-        <h6 class="card-header text-success bg-transparent">Category: {{ $row->category->name }}</h6>
-        <div class="card-body">
+<div class="card mb-2 mycard">
+    <h5 class="card-header">{{ $row->name }}</h5>
+    <h6 class="card-header text-success bg-transparent">Category: {{ $row->category->name }}</h6>
+    <div class="card-body d-flex">
+        <div class="card_body_image me-5">
+            <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="100">
+        </div>
+        <div class="card_body_btns">
             <a href="{{ route('dishes.edit',['restaurant_id' => $restaurant_id, 'dish_id' => $row['id']]) }}" class="btn btn-warning">UPDATE</a>
             <!-- Button trigger modal -->
             <div class="btn btn-danger delete">DELETE</div>
@@ -22,8 +26,9 @@
                 <div class="modal_btns">
                     <button class="btn btn-secondary cancel_btn">CANCEL</button>
                     <a href="{{ route('dishes.delete', ['dish_id' => $row['id']]) }}" class="btn btn-danger">DELETE</a>
+                </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 @endforeach

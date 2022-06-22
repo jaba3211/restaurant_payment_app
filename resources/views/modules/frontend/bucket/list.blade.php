@@ -21,7 +21,7 @@
                 <button type="button"
                         class="btn bg-light border rounded-circle d-flex justify-content-center align-items-center plus_btn"
                         style="width: 37px; height: 37px; font-size: 18px;">+</button>
-                    <input type="submit" class="btn btn-warning" value="CHOOSE">
+                    <input type="submit" class="btn btn-warning" value="CONFIRM">
                     <a href="{{ route('bucket.remove',['dish_id' => $row->id]) }}" class="btn btn-danger">DELETE</a>
             </div>
             </form>
