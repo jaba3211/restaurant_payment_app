@@ -1,10 +1,10 @@
 @foreach($list as $row)
-<div class="card mb-2 mycard">
+<div class="card mb-3 mycard">
     <h5 class="card-header">{{ $row->name }}</h5>
     <h6 class="card-header text-info bg-transparent">ID: {{ $row->id }}</h6>
-    <div class="card-body">
+    <div class="card-body mycard_body">
         <!-- Button trigger modal -->
-        <div class="btn btn-danger delete">DELETE</div>
+        <div class="btn btn-danger delete body_btn">DELETE</div>
         <!-- Modal -->
         <div class="delete_modal">
             <div class="modal_top d-flex justify-content-between">
@@ -24,10 +24,10 @@
             </div>
         </div>
 
-        <a href="{{ route('restaurants.edit', ['restaurant_id' => $row['id']]) }}" class="btn btn-warning delete_confirm_btn">UPDATE</a>
+        <a href="{{ route('restaurants.edit', ['restaurant_id' => $row['id']]) }}" class="btn btn-warning delete_confirm_btn body_btn">UPDATE</a>
 
-        <a href="{{ route('dishes', ['restaurant_id' => $row['id']]) }}" class="btn btn-primary admin_change_btn" style="background:#f0bb18; border:0;">DISHES</a>
-        <a href="{{ route('categories', ['restaurant_id' => $row['id']]) }}" class="btn btn-secondary admin_change_btn" style="background:#73ee73; border:0;">CATEGORIES</a>
+        <a href="{{ route('dishes', ['restaurant_id' => $row['id']]) }}" class="btn btn-primary admin_change_btn body_btn" style="background:#f0bb18; border:0;">DISHES</a>
+        <a href="{{ route('categories', ['restaurant_id' => $row['id']]) }}" class="btn btn-secondary admin_change_btn body_btn" style="background:#73ee73; border:0;">CATEGORIES</a>
 
     </div>
 </div>

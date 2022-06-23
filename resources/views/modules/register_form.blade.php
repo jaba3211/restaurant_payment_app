@@ -4,7 +4,7 @@
         $resetPssUrl = $row->status_id == USER ? route('user.confirm.password', ['username' => $row->username]) : route('staff.edit.password', ['username' => $row->username]);
     }
 @endphp
-<form action="{{ $url }}" method="POST" class="w-100">
+<form action="{{ $url }}" method="POST" class="w-100 registration_form">
     @csrf
 
     @if(!empty(session('success')))

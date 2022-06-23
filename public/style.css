@@ -212,8 +212,8 @@
     width: 20px;
     height: 20px;
 }
-.add_check_btn{
-display: none;
+.add_check_btn {
+    display: none;
 }
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeInn {
@@ -250,5 +250,82 @@ display: none;
     }
     video {
         width: 296px !important;
+    }
+}
+
+/* responsive*/
+
+@media screen and (min-width: 320px) {
+    .mycard_body {
+        display: flex;
+        flex-direction: column;
+    }
+    .delete_modal {
+        width: 96%;
+    }
+    .body_btn {
+        margin-bottom: 10px;
+    }
+    .dish_image_admin{
+        width:150px!important;
+    }
+}
+@media screen and (min-width: 420px) {
+    .mycard{
+        width: 48% !important;
+    }
+    .restaurants_list_from_admin {
+        display: flex !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+    }
+    .delete_modal {
+        width: 60%;
+    }
+    .card_body_image {
+        margin-bottom: 10px;
+    }
+    .mycard_dish_admin{
+        width: 100%!important;
+    }
+}
+/* @media screen and (min-width: 650px) {
+    .mycard_cat_admin{
+        width: 48%;
+    }
+} */
+@media screen and (min-width: 844px) {
+    .mycard_body {
+        flex-direction: row;
+    }
+
+    .body_btn {
+        margin-bottom: 0px;
+        margin-right: 5px;
+    }
+    .delete_modal {
+        width: 70%;
+        max-width: 700px;
+    }
+    .mycard_dish_admin {
+        width: 48%!important;
+    }
+}
+@media screen and (min-width: 992px) {
+    .registration_form,
+    .auth_form,
+    .create_form {
+        width: 60% !important;
+    }
+
+}
+@media screen and (min-width: 1260px) {
+    .mycard, .mycard_dish_admin {
+        width: 32% !important;
+    }
+}
+@media screen and (min-width: 1881px) {
+    .mycard {
+        width: 21% !important;
     }
 }

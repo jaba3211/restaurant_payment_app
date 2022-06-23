@@ -5,7 +5,7 @@
         $url = route('dishes.update', ['restaurant_id' => $restaurant_id, 'dish_id' => $row->id]);
     }
 @endphp
-<form action="{{ $url }}" method="POST" class="w-100" enctype="multipart/form-data">
+<form action="{{ $url }}" method="POST" class="w-100 create_form" enctype="multipart/form-data">
     @csrf
 
     @if(!empty(session('success')))

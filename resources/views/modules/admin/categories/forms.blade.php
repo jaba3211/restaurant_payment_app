@@ -5,7 +5,7 @@
         $url = route('categories.update', ['restaurant_id' => $restaurant_id, 'category_id' => $row->id]);
     }
 @endphp
-<form action="{{ $url }}" method="POST" class="w-100" enctype="multipart/form-data">
+<form action="{{ $url }}" method="POST" class="w-100 create_form" enctype="multipart/form-data">
     @csrf
     @if(!empty(session('error')))
         <h1 style="color: red">{{ session('error') }}</h1>

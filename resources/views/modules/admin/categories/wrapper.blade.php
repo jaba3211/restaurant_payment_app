@@ -12,7 +12,7 @@
                 <h1 style="color: green">{{ session('error') }}</h1>
             @endif
             <div class="d-flex align-items-center flex-column main-comps-container">
-                <div class="cards-group w-100">
+                <div class="cards-group w-100 restaurants_list_from_admin">
                     @include('modules.admin.categories.list')
                 </div>
             </div>

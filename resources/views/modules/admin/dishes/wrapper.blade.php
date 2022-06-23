@@ -6,7 +6,7 @@
                 <a href="{{ route('dishes.add',['restaurant_id' => $restaurant_id])  }}" class="btn btn-success">Add Dish</a>
             </div>
             <div class="d-flex align-items-center flex-column main-comps-container">
-                <div class="cards-group w-100">
+                <div class="cards-group w-100 restaurants_list_from_admin">
                     @include('modules.admin.dishes.list')
                 </div>
             </div>

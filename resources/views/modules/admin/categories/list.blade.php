@@ -1,14 +1,14 @@
 @foreach($list as $row)
 <div class="card mb-2 mycard">
     <h5 class="card-header">{{ $row->name }}</h5>
-    <div class="card-body d-flex">
+    <div class="card-body d-flex flex-wrap">
         <div class="card_body_image me-5">
             <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="100">
         </div>
         <div class="card_body_btns">
-            <a href="{{ route('categories.edit', ['restaurant_id' => $restaurant_id, 'category_id' => $row['id']]) }}" class="btn btn-warning">UPDATE</a>
+            <a href="{{ route('categories.edit', ['restaurant_id' => $restaurant_id, 'category_id' => $row['id']]) }}" class="btn btn-warning body_btn">UPDATE</a>
             <!-- Button trigger modal -->
-            <div class="btn btn-danger delete">DELETE</div>
+            <div class="btn btn-danger delete body_btn">DELETE</div>
             <!-- Modal -->
             <div class="delete_modal">
                 <div class="modal_top d-flex justify-content-between">

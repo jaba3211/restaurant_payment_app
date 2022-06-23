@@ -18,7 +18,7 @@
                 @if(!empty(session('success')))
                     <h1 style="color: green">{{ session('success') }}</h1>
                 @endif
-                <div class="cards-group w-100">
+                <div class="cards-group w-100 restaurants_list_from_admin">
                     @include('modules.admin.users.list')
                 </div>
             </div>
