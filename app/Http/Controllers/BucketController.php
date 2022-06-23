@@ -38,6 +38,24 @@ class BucketController extends BaseController
     }
 
     /**
+     * @param Request $request
+     * @param Dish $dish
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function addMulti(Request $request, Dish $dish)
+    {
+        $dish_ids = $request->get('dish_ids');
+        $category_id = 0;
+        foreach ($dish_ids as $dish_id) {
+            $row = $dish->getDish($dish_id);
+            $category_id = $row->category_id;
+            \Cart::add($row->id, $row->name, $row->price, 1, $row->image);
+        }
+        return redirect(route('dishes.show', ['dish_id' => $category_id]));
+
+    }
+
+    /**
      * @return Application|Factory|View
      */
     public function index()

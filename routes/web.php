@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function (){
     /* bucket */
     Route::get ('/basket', [BucketController::class,'index'])->name('bucket');
     Route::get('/basket/add', [BucketController::class,'add'])->name('bucket.add');
+    Route::post('/basket/add/multi', [BucketController::class,'addMulti'])->name('bucket.add.multi');
     Route::post('/basket/update', [BucketController::class,'update'])->name('bucket.update');
     Route::get('/basket/remove', [BucketController::class,'remove'])->name('bucket.remove');
     Route::get('/basket/cancel', [BucketController::class,'cancel'])->name('bucket.cancel');
