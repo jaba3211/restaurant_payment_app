@@ -1,4 +1,5 @@
 @foreach($list as $row)
+<div class="mycard">
     <div class="table d-flex align-items-center w-100 card flex-row ps-2 mb-0">
         <span style="width:15px;">
             <!-- <img src="{{ url('storage/cold_dish.png') }}" alt="" class="img-fluid" width="100"> -->
@@ -15,4 +16,5 @@
     <div class="order mb-4 w-100">
         <a href="{{ route('staff.new.orders.inside', ['table' => $row->table, 'date' => $row->created_at]) }}" class=" text-white btn btn-success w-100">See Order Details</a>
     </div>
+</div>
 @endforeach

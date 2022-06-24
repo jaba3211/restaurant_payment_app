@@ -6,7 +6,7 @@
                 <h2 class="login_form_heading text-center my-4">
                     RESTAURANT ORDERS
                 </h2>
-                <div class="cards-group w-100">
+                <div class="cards-group w-100 restaurants_list_from_admin">
                     @include('modules.staff.orders.old.list')
                 </div>
             </div>
