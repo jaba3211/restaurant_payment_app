@@ -8,7 +8,7 @@
         @php
             $checked = $cart->where('id', $row->id)->count() ? 'checked' : '';
         @endphp
-        <div class="mb-3">
+        <div class="mb-3 trigger_card">
             <div class="dishes d-flex align-items-center w-100 card shadow-sm flex-row flex-wrap position-relative">
                 <span>
                     <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="150">
@@ -18,7 +18,7 @@
                     <span class="d-block fw-normal" style="font-size:14px;">{{ $row->short_desc }}</span>
                     <span class="dish_price mb-3 d-block">{{ $row->price }}₾</span>
                 </span>
-                <input type="checkbox" {{ $checked }} name="dish_ids[]" value="{{ $row->id }}" class="form-check-input dish_check_input">
+                <input type="checkbox" {{ $checked }} name="dish_ids[]" value="{{ $row->id }}" class="form-check-input trigger">
             </div>
             <div>
                 <a href="{{ route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]) }}" class=" text-white btn btn-success w-100">See More</a>

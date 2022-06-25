@@ -99,9 +99,7 @@
     -webkit-animation: fadeInn 1s;
     animation: fadeInn 1s;
 }
-.my_show_class {
-    display: block!important;
-}
+
 .body_wrapper::after {
     content: "";
     background: rgba(0, 0, 0, 0.4);
@@ -207,7 +205,7 @@
         opacity: 0;
     }
 }
-.dish_check_input {
+.trigger {
     position: absolute;
     right: 5px;
     top: 5px;
@@ -216,6 +214,9 @@
 }
 .add_check_btn {
     display: none;
+}
+.show-button {
+    display: block !important;
 }
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeInn {

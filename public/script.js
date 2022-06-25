@@ -25,19 +25,22 @@
 
     });
    /*code for chheckbox is checked*/
-    var dish_check_inputs=document.querySelectorAll('.dish_check_input');
-    var add_check_btn=document.querySelector('.add_check_btn');
-    dish_check_inputs.forEach(e => {
-      // e.oninput=function(){
-      //   add_check_btn.style.display="block";
-      // }
-      e.onclick=function(){
-       if (e.checked==true) {
-                add_check_btn.classList.add('my_show_class');
-
-       }else{
-        add_check_btn.classList.remove('my_show_class');
-
+   const checkBoxes = document.querySelectorAll('.trigger')
+   const cards = document.querySelectorAll('.trigger_card')
+   const addButton = document.querySelector('.add_check_btn')
+   let selectedCheckBoxes = 0
+   let selectedCards = []
+   
+   checkBoxes.forEach(checkBox => {
+       checkBox.onclick = (e) => {
+           if (e.target.checked) {
+               selectedCheckBoxes++;
+               selectedCards.push(e.target.parentNode);
+           } else {
+               let cardIndex = selectedCards.indexOf(e.target.parentNode);
+               selectedCards.splice(cardIndex, 1);
+               selectedCheckBoxes--;
+           }
+           selectedCheckBoxes > 0 ? addButton.classList.add('show-button') : addButton.classList.remove('show-button');
        }
-      }
-    });
+   })
