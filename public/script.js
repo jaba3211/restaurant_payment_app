@@ -24,11 +24,20 @@
         cancel_btn.onclick = disappear_modal;
 
     });
-   
+   /*code for chheckbox is checked*/
     var dish_check_inputs=document.querySelectorAll('.dish_check_input');
     var add_check_btn=document.querySelector('.add_check_btn');
     dish_check_inputs.forEach(e => {
-      e.oninput=function(){
-        add_check_btn.style.display="block";
+      // e.oninput=function(){
+      //   add_check_btn.style.display="block";
+      // }
+      e.onclick=function(){
+       if (e.checked==true) {
+                add_check_btn.classList.add('my_show_class');
+
+       }else{
+        add_check_btn.classList.remove('my_show_class');
+
+       }
       }
     });

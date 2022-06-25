@@ -99,7 +99,9 @@
     -webkit-animation: fadeInn 1s;
     animation: fadeInn 1s;
 }
-
+.my_show_class {
+    display: block!important;
+}
 .body_wrapper::after {
     content: "";
     background: rgba(0, 0, 0, 0.4);
@@ -276,7 +278,6 @@
 @media screen and (min-width: 360px) {
     .single_orger_image_from_staff {
         width: 170px !important;
-       
     }
     .single_order_product {
         flex-wrap: nowrap !important;
@@ -306,8 +307,8 @@
     }
 }
 @media screen and (min-width: 560px) {
-    .single_order_product{
-        width: 48%!important;
+    .single_order_product {
+        width: 48% !important;
     }
 }
 @media screen and (min-width: 844px) {
@@ -333,15 +334,14 @@
     .create_form {
         width: 60% !important;
     }
-   
 }
 @media screen and (min-width: 1260px) {
     .mycard,
     .mycard_dish_admin {
         width: 32% !important;
     }
-    .single_order_product{
-        width: 24%!important;
+    .single_order_product {
+        width: 24% !important;
     }
 }
 @media screen and (min-width: 1881px) {
