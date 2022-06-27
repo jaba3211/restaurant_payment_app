@@ -25,9 +25,5 @@
             </div>
         </div>
     @endforeach
-    @if($cart->count() == 0)
-        <button type="submit" class="rounded-circle btn btn-danger position-fixed fs-3 add_check_btn" style="bottom:20px; right:20px; width:80px; height:80px;">Add</button>
-    @else
-        <a href="{{ route('bucket.cancel') }}" class="rounded-circle btn btn-danger position-fixed fs-3 add_check_btn" style="bottom:20px; right:20px; width:80px; height:80px;">Del</a>
-    @endif
+    <button type="submit" class="rounded-circle btn btn-danger position-fixed fs-3 add_check_btn" style="bottom:20px; right:20px; width:80px; height:80px;">Add</button>
 </form>
