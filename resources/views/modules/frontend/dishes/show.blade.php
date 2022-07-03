@@ -13,7 +13,7 @@
                     @if(!empty(session('success')))
                         <h1 style="color: green">{{ session('success') }}</h1>
                     @endif
-                    <div class="card mb-3"  style="width:85%">
+                    <div class="card mb-3 my_show_card"  style="width:85%">
                         <img src="{{ url('/storage/'.$row->image) }}" class="card-img-top" alt="{{ $row->name }}">
                         <div class="card-body">
                             <h5 class="card-title" style="color: #ef9e4c;">{{ $row->name }}</h5>

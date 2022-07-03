@@ -1,7 +1,7 @@
 @foreach($list as $row)
-    <div class="card d-flex w-100 mb-3 shadow-sm flex-row" style="background: #76be622b;">
-        <div style="width:40% ;">
-            <img src="{{ url('/storage/'.$row->dish->image) }}" alt="{{ $row->dish->name }}" class="img-fluid h-100" width="200">
+    <div class="card d-flex align-items-center w-100 mb-3 shadow-sm flex-row flex-wrap single_order_product" style="background: #76be622b;">
+        <div>
+            <img src="{{ url('/storage/'.$row->dish->image) }}" alt="{{ $row->dish->name }}" class="img-fluid h-100 single_orger_image_from_staff" width="200">
         </div>
         <div class="card-body p-2">
             <h5 class="card-title fw-bold">

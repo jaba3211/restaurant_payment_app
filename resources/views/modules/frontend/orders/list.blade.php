@@ -2,7 +2,7 @@
     @php
         $date = $row->created_at->format('d/m/Y H:m:s')
     @endphp
-    <div class="card w-100 mb-3" style="background:#f2d4812e;">
+    <div class="card w-100 mb-3 mycard" style="background:#f2d4812e;">
         <div class="card-body">
             <div class="d-flex justify-content-between flex-wrap">
                 <h5 class="card-title text-success">{{ $row->payment_id == IN_CACHE ? 'In cache' : 'By card' }}</h5>

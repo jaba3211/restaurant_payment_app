@@ -272,7 +272,8 @@
     .dish_image_admin {
         width: 150px !important;
     }
-    .single_orger_image_from_staff {
+    .single_orger_image_from_staff,
+    .user_dish_img {
         width: 100% !important;
     }
 }
@@ -286,6 +287,9 @@
     }
     .single_order_product p {
         margin-bottom: 0px !important;
+    }
+    .user_dish_img {
+        width: unset !important;
     }
 }
 @media screen and (min-width: 420px) {
@@ -311,6 +315,9 @@
     .single_order_product {
         width: 48% !important;
     }
+    .my_show_card {
+        width: 60% !important;
+    }
 }
 @media screen and (min-width: 844px) {
     .mycard_body {
@@ -334,6 +341,9 @@
     .auth_form,
     .create_form {
         width: 60% !important;
+    }
+    .my_show_card {
+        width: 40% !important;
     }
 }
 @media screen and (min-width: 1260px) {

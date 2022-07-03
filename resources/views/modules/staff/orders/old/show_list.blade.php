@@ -1,5 +1,5 @@
 @foreach($list as $row)
-<div class="card d-flex align-items-center w-100 card  mb-3 shadow-sm flex-row flex-wrap single_order_product" style="background: #76be622b;">
+<div class="card d-flex align-items-center w-100 mb-3 shadow-sm flex-row flex-wrap single_order_product" style="background: #76be622b;">
     <span>
         <img src="{{ url('storage/'.$row->dish->image) }}" alt="{{ $row->dish->name }}" class="img-fluid single_orger_image_from_staff" width="200">
     </span>

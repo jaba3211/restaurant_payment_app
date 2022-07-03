@@ -1,5 +1,5 @@
 @foreach($list as $row)
-    <a href="{{ route('dishes.front',['category_id' => $row->id]) }}" class="d-block w-100 text-decoration-none">
+    <a href="{{ route('dishes.front',['category_id' => $row->id]) }}" class="d-block w-100 text-decoration-none mycard">
         <div class="menu_category d-flex justify-content-between align-items-center w-100 card mb-3 p-3 shadow-sm">
             <span class="menu_cat_icon">
                 <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row['name'] }}" class="img-fluid" width="100">

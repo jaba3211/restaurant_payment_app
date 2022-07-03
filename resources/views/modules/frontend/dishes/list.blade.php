@@ -1,17 +1,19 @@
 @php
-    $cart = \Cart::getContent();
-    $url = auth() ? route('bucket.add.multi') : route('authorization')
+$cart = \Cart::getContent();
+$url = auth() ? route('bucket.add.multi') : route('authorization')
 @endphp
 <form action="{{ $url }}" method="POST" class="w-100">
     @csrf
-    @foreach($list as $row)
+    <div class="w-100 d-flex flex-wrap justify-content-between">
+        @foreach($list as $row)
         @php
-            $checked = $cart->where('id', $row->id)->count() ? 'checked' : '';
+        $checked = $cart->where('id', $row->id)->count() ? 'checked' : '';
         @endphp
-        <div class="mb-3 trigger_card">
+
+        <div class="mb-3 trigger_card mycard_dish_admin w-100">
             <div class="dishes d-flex align-items-center w-100 card shadow-sm flex-row flex-wrap position-relative">
-                <span>
-                    <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid" width="150">
+                <span class="user_dish_img">
+                    <img src="{{ url('/storage/'.$row->image) }}" alt="{{ $row->image }}" class="img-fluid single_orger_image_from_staff" width="150">
                 </span>
                 <span class="menu_cat_name ms-3 fw-bold">
                     {{ $row->name }}
@@ -24,6 +26,7 @@
                 <a href="{{ route('dishes.show', ['dish_id' => $row->id, 'name' => $row->name]) }}" class=" text-white btn btn-success w-100">See More</a>
             </div>
         </div>
-    @endforeach
+        @endforeach
+    </div>
     <button type="submit" class="rounded-circle btn btn-danger position-fixed fs-3 add_check_btn" style="bottom:20px; right:20px; width:80px; height:80px;">Add</button>
 </form>
