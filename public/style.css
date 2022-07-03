@@ -192,7 +192,28 @@
     animation: none;
     display: none;
 }
-
+.order_confirm_btn{
+    border: 0;
+    background: green;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.order_remove_btn{
+    border: 0;
+    background: red;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
 @keyframes ring {
     0% {
         width: 30px;
@@ -275,6 +296,9 @@
     .single_orger_image_from_staff,
     .user_dish_img {
         width: 100% !important;
+    }
+    .padd_bot{
+        padding-bottom:10px;
     }
 }
 @media screen and (min-width: 360px) {

@@ -2,7 +2,7 @@
 @section('content')
     <main class="d-flex justify-content-center align-items-center app-screen-height" style="background:#FCFAEB;">
         <div class="container-fluid">
-            <div class="container">
+            <div class="container pb-4">
                 @if(count($list) > 0)
                     <div class="d-flex align-items-center flex-column main-comps-container">
                         <h2 class="menu_title my-5">
@@ -13,7 +13,9 @@
                                 {{ session('error') }}
                             </h2>
                         @endif
+                        <div class="d-flex flex-wrap justify-content-between w-100">
                         @include('modules.frontend.bucket.list')
+                        </div>
                         <a href="{{ route('bucket.cancel') }}" class="btn btn-danger mt-3">DELETE ORDER</a>
                         <a href="{{ route('payment.choose') }}" class="btn btn-success mt-3">CONFIRM ORDER</a>
                     </div>
