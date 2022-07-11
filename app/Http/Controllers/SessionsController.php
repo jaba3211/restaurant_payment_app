@@ -27,7 +27,7 @@ class SessionsController extends BaseController
     /**
      * @param User $user
      * @param Request $request
-     * @return Application|RedirectResponse|Redirector
+     * @return Application|RedirectResponse|Redirector|void
      * @throws ValidationException
      */
     public function create(User $user, Request $request)
@@ -51,12 +51,14 @@ class SessionsController extends BaseController
     }
 
     /**
-     * @return void
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
      */
     public function logout(Request $request)
     {
         $request->session()->forget('restaurant_id');
-         $request->session()->forget('table');
+        $request->session()->forget('table');
+        \Cart::clear();
         auth()->logout();
 
         return redirect('/');
